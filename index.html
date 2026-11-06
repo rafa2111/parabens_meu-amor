@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Story: Nosso Amor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #121218;
+            color: #fff;
+            font-family: 'VT323', monospace;
+            font-size: 24px;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        h1, h2, h3, .pixel-font { font-family: 'Press Start 2P', monospace; }
+        
+        /* TELA DE SENHA */
+        #lock-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #0b0b10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            text-align: center;
+            padding: 20px;
+        }
+        .retro-box {
+            border: 4px solid #ff77a9;
+            background: #1a1a24;
+            padding: 30px;
+            box-shadow: 6px 6px 0px #ff0055;
+            max-width: 500px;
+            width: 100%;
+        }
+        input[type="password"] {
+            background: #121218;
+            border: 2px solid #ff77a9;
+            color: #fff;
+            padding: 10px;
+            font-family: 'VT323', monospace;
+            font-size: 28px;
+            width: 100%;
+            margin: 20px 0;
+            text-align: center;
+            outline: none;
+        }
+        button.retro-btn {
+            background: #ff0055;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #880022;
+            transition: 0.1s;
+        }
+        button.retro-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #880022;
+        }
+
+        /* CONTAINER PRINCIPAL */
+        #main-content {
+            display: none;
+            width: 100%;
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 3px dashed #ff77a9;
+            padding-bottom: 15px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+        nav button {
+            background: #2a2a3d;
+            color: #ff77a9;
+            border: 2px solid #ff77a9;
+            padding: 8px 15px;
+            font-family: 'VT323', monospace;
+            font-size: 22px;
+            cursor: pointer;
+        }
+        nav button.active, nav button:hover {
+            background: #ff77a9;
+            color: #121218;
+        }
+
+        .section-view { display: none; }
+        .section-view.active { display: block; }
+
+        /* PERFIL / STATUS */
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media(max-width: 600px) { .status-grid { grid-template-columns: 1fr; } }
+        
+        .bar-container {
+            background: #111;
+            border: 2px solid #444;
+            height: 25px;
+            margin-top: 5px;
+            position: relative;
+        }
+        .bar-fill {
+            height: 100%;
+            background: #00ffcc;
+            width: 0%;
+            transition: width 0.5s;
+        }
+        .bar-fill.danger { background: #ff3333; }
+        .bar-fill.warning { background: #ffcc00; }
+
+        /* LOJA / MINIGAME */
+        .shop-items {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .shop-card {
+            background: #1a1a24;
+            border: 2px solid #ffcc00;
+            padding: 15px;
+            text-align: center;
+        }
+        #heart-clicker {
+            font-size: 60px;
+            cursor: pointer;
+            text-align: center;
+            margin: 20px 0;
+            user-select: none;
+            transition: transform 0.1s;
+        }
+        #heart-clicker:active { transform: scale(1.2); }
+
+        /* DIÁLOGOS E ANIMAÇÕES */
+        .story-box {
+            background: #1a1a24;
+            border: 3px solid #00ffcc;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        /* AUDIO PLAYER */
+        #audio-controls {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: #1a1a24;
+            border: 2px solid #ff77a9;
+            padding: 8px;
+            z-index: 99;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MÚSICA DE FUNDO -->
+    <audio id="bgm" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-cute.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- TELA DE SENHA -->
+    <div id="lock-screen">
+        <div class="retro-box">
+            <h2 style="font-size: 18px; color: #ff77a9; margin-bottom: 15px;">🔒 RESTRICTED SAVE FILE</h2>
+            <p style="font-size: 20px;">Insira a senha secreta (Dica: Nosso aniversário ou palavra especial):</p>
+            <input type="password" id="pass-input" placeholder="Digite a senha...">
+            <br>
+            <button class="retro-btn" onclick="checkPassword()">DESBLOQUEAR</button>
+            <p id="error-msg" style="color: #ff3333; font-size: 18px; margin-top: 10px; display: none;">Senha incorreta, tente de novo!</p>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL DO SITE -->
+    <div id="main-content">
+        <header>
+            <h1 style="font-size: 20px; color: #ff77a9;">❤ PLAYER 1 & PLAYER 2 ❤</h1>
+            <p style="color: #00ffcc;">RPG Edition - Nossa Aventura Juntos</p>
+        </header>
+
+        <nav>
+            <button onclick="switchTab('profile')" class="active">Perfil</button>
+            <button onclick="switchTab('story')">Main Story</button>
+            <button onclick="switchTab('coop')">Co-op Missions</button>
+            <button onclick="switchTab('shop')">Item Shop</button>
+            <button onclick="switchTab('letter')">Carta & Fotos</button>
+        </nav>
+
+        <!-- ABA PERFIL / STATUS -->
+        <div id="profile" class="section-view active">
+            <div class="retro-box">
+                <h3 style="color: #ff77a9; margin-bottom: 15px;">📊 STATUS DO JOGADOR</h3>
+                <div class="status-grid">
+                    <div>
+                        <p><strong>Nome:</strong> Giorgio</p>
+                        <p><strong>Nova Idade:</strong> Level Up! ✨</p>
+                        <p style="margin-top: 15px;">Paciência:</p>
+                        <div class="bar-container"><div class="bar-fill" style="width: 85%;"></div></div>
+                        <p style="margin-top: 10px;">Ansiedade:</p>
+                        <div class="bar-container"><div class="bar-fill warning" style="width: 40%;"></div></div>
+                    </div>
+                    <div>
+                        <p><strong>Classe:</strong> Namorado Perfeito</p>
+                        <p><strong>Status:</strong> Amado Demais</p>
+                        <p style="margin-top: 15px;">Ciúmes:</p>
+                        <div class="bar-container"><div class="bar-fill danger" style="width: 15%;"></div></div>
+                        <p style="margin-top: 10px;">Cuidado:</p>
+                        <div class="bar-container"><div class="bar-fill" style="width: 100%;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA MAIN STORY -->
+        <div id="story" class="section-view">
+            <div class="story-box">
+                <h3 style="color: #00ffcc; margin-bottom: 10px;">📖 Capítulo 1: O Início do Jogo</h3>
+                <p>Tudo começou quando nossos caminhos se cruzaram. Desde o primeiro momento, o jogo mudou de nível. Cada conversa e cada risada foram desbloqueando fases inesquecíveis da nossa história juntos.</p>
+            </div>
+            <div class="story-box">
+                <h3 style="color: #00ffcc; margin-bottom: 10px;">📖 Capítulo 2: Missões Secundárias e Risadas</h3>
+                <p>As melhores memórias são aquelas em que estamos jogando no mesmo time, rindo das nossas piadas internas e construindo momentos únicos.</p>
+            </div>
+        </div>
+
+        <!-- ABA CO-OP MISSIONS -->
+        <div id="coop" class="section-view">
+            <div class="retro-box">
+                <h3 style="color: #ffcc00; margin-bottom: 10px;">🤝 Missões em Dupla (Co-op)</h3>
+                <p>• Maratona de Séries juntos: <strong>Concluído (XP Máximo)</strong></p>
+                <p style="margin-top: 10px;">• Descobrir novos lugares para comer: <strong>Em Andamento</strong></p>
+                <p style="margin-top: 10px;">• Ajudar nas maratonas de programação / faculdade: <strong>Missão Ativa</strong></p>
+            </div>
+        </div>
+
+        <!-- ABA ITEM SHOP / MINIGAME -->
+        <div id="shop" class="section-view">
+            <div class="retro-box" style="text-align: center;">
+                <h3 style="color: #ff77a9;">🛒 LOJA DE CUPONS & CORAÇÕES</h3>
+                <p style="margin-top: 10px; font-size: 26px;">Seus Corações: <span id="coin-count" style="color: #ff0055;">0</span> 💖</p>
+                <p style="font-size: 18px; color: #888; margin-top: 5px;">Clique no coração abaixo para farmar moedas para gastar nos prêmios!</p>
+                
+                <div id="heart-clicker" onclick="earnCoin()">💖</div>
+
+                <div class="shop-items">
+                    <div class="shop-card">
+                        <p style="color: #ff77a9; font-weight: bold;">Vale Beijo</p>
+                        <p style="font-size: 18px; margin: 5px 0;">Custo: 10 💖</p>
+                        <button class="retro-btn" onclick="buyItem(10, 'Vale Beijo resgatado com sucesso!')">Resgatar</button>
+                    </div>
+                    <div class="shop-card">
+                        <p style="color: #ff77a9; font-weight: bold;">Vale Call / Filme</p>
+                        <p style="font-size: 18px; margin: 5px 0;">Custo: 25 💖</p>
+                        <button class="retro-btn" onclick="buyItem(25, 'Vale Call/Filme resgatado!')">Resgatar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA CARTA E FOTOS -->
+        <div id="letter" class="section-view">
+            <div class="retro-box">
+                <h3 style="color: #ff77a9; margin-bottom: 15px;">💌 Carta para o Player 1</h3>
+                <p style="line-height: 1.6;">Meu amor, mesmo sendo de áreas completamente diferentes, você me inspirou a criar esse mundinho digital só nosso. Cada detalhe aqui foi feito pensando no quanto você é especial pra mim. Obrigado por ser meu player 2 favorito na vida inteira!</p>
+                
+                <h3 style="color: #ff77a9; margin-top: 25px; margin-bottom: 15px;">📸 Galeria de Memórias</h3>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                    <div style="border: 2px solid #00ffcc; padding: 5px; width: 45%; text-align: center;">
+                        <img src="https://picsum.photos/300/200?random=1" style="width: 100%; height: 150px; object-fit: cover;" alt="Foto 1">
+                        <p style="font-size: 18px; margin-top: 5px;">Nosso Momento 1</p>
+                    </div>
+                    <div style="border: 2px solid #00ffcc; padding: 5px; width: 45%; text-align: center;">
+                        <img src="https://picsum.photos/300/200?random=2" style="width: 100%; height: 150px; object-fit: cover;" alt="Foto 2">
+                        <p style="font-size: 18px; margin-top: 5px;">Nosso Momento 2</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUDIO CONTROLS -->
+    <div id="audio-controls">
+        🎵 <button onclick="toggleMusic()" id="music-btn" style="background:none; border:none; color:#ff77a9; font-family:'VT323'; font-size:20px; cursor:pointer;">Tocar Música</button>
+    </div>
+
+    <script>
+        let coins = 0;
+
+        function checkPassword() {
+            let pass = document.getElementById('pass-input').value;
+            // A senha padrão aqui é a data ou palavra que você escolher, ex: "1234" ou a data de vocês
+            if(pass === "1234" || pass.toLowerCase() === "amor" || pass.length > 0) {
+                document.getElementById('lock-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                // Tenta tocar a música automaticamente
+                let audio = document.getElementById('bgm');
+                audio.play().catch(e => console.log("Audio play blocked"));
+                document.getElementById('music-btn').innerText = "Pausar Música";
+            } else {
+                document.getElementById('error-msg').style.display = 'block';
+            }
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.section-view').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function earnCoin() {
+            coins++;
+            document.getElementById('coin-count').innerText = coins;
+        }
+
+        function buyItem(cost, message) {
+            if(coins >= cost) {
+                coins -= cost;
+                document.getElementById('coin-count').innerText = coins;
+                alert("🎉 " + message);
+            } else {
+                alert("❌ Faltam corações! Clique mais no coração rosa para juntar moedas.");
+            }
+        }
+
+        function toggleMusic() {
+            let audio = document.getElementById('bgm');
+            let btn = document.getElementById('music-btn');
+            if(audio.paused) {
+                audio.play();
+                btn.innerText = "Pausar Música";
+            } else {
+                audio.pause();
+                btn.innerText = "Tocar Música";
+            }
+        }
+    </script>
+</body>
+</html>
