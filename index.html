@@ -3,476 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nossa Aventura RPG - Giorgio & Rafaella</title>
+    <title>Stardew Valley - Giorgio & Rafaella</title>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-pink: #ffb7c5;
+            --stardew-wood: #8b4513;
+            --stardew-dark-wood: #5c2e0b;
+            --stardew-border: #e6c280;
+            --stardew-bg: #f4e4bc;
+            --pink-accent: #ffb7c5;
             --dark-pink: #d87093;
-            --stardew-bg: #2d1b2d;
-            --stardew-card: #4a284a;
-            --stardew-border: #f8c8dc;
-            --text-color: #fff0f5;
+            --text-color: #4a2e1b;
         }
 
         body {
-            background-color: var(--stardew-bg);
-            background-image: radial-gradient(circle, #3d223d 10%, #2d1b2d 90%);
+            background-color: #2b1d14;
+            background-image: radial-gradient(circle, #422a1d 10%, #2b1d14 90%);
             color: var(--text-color);
             font-family: 'VT323', monospace;
             font-size: 24px;
             margin: 0;
-            padding: 0;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
+            box-sizing: border-box;
         }
 
-        /* Animações de brilho e zoom */
+        /* Container Principal com Moldura de Madeira Stardew */
+        .stardew-box {
+            background-color: var(--stardew-bg);
+            border: 6px solid var(--stardew-wood);
+            outline: 3px solid var(--stardew-border);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.6);
+            border-radius: 8px;
+            padding: 25px;
+            width: 100%;
+            max-width: 750px;
+            text-align: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
         .pixel-btn {
-            background-color: var(--dark-pink);
-            color: #fff;
-            border: 3px solid var(--stardew-border);
-            padding: 10px 20px;
+            background: linear-gradient(180deg, #ff91a4 0%, var(--dark-pink) 100%);
+            color: #ffffff;
+            border: 4px solid var(--stardew-wood);
+            outline: 2px solid var(--stardew-border);
+            padding: 10px 24px;
             font-family: 'VT323', monospace;
             font-size: 26px;
             cursor: pointer;
-            box-shadow: 0 4px 0 #8b3a62;
-            transition: all 0.1s ease;
+            box-shadow: 0 4px 0 var(--stardew-dark-wood);
+            margin: 8px;
             text-shadow: 2px 2px #000;
+            transition: transform 0.1s, filter 0.1s;
         }
 
         .pixel-btn:hover {
-            background-color: #ff91a4;
-            transform: scale(1.05);
-            box-shadow: 0 6px 0 #8b3a62, 0 0 15px var(--primary-pink);
-        }
-
-        .pixel-btn:active {
-            transform: scale(0.98);
-            box-shadow: 0 2px 0 #8b3a62;
-        }
-
-        /* Telas */
-        .screen {
-            display: none;
-            width: 100%;
-            max-width: 800px;
-            padding: 20px;
-            box-sizing: border-box;
-            text-align: center;
-        }
-
-        .active-screen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Tela de Senha */
-        #lock-screen {
-            margin-top: 15vh;
-            background: var(--stardew-card);
-            border: 4px solid var(--stardew-border);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(216, 112, 147, 0.4);
-        }
-
-        #pass-input {
-            background: #1e111e;
-            border: 2px solid var(--primary-pink);
-            color: #fff;
-            padding: 10px;
-            font-family: 'VT323', monospace;
-            font-size: 24px;
-            text-align: center;
-            margin: 15px 0;
-            width: 200px;
-        }
-
-        /* Tela de Loading */
-        #loading-screen {
-            margin-top: 20vh;
-        }
-
-        .loading-container {
-            width: 100%;
-            max-width: 500px;
-            background: #111;
-            border: 4px solid var(--primary-pink);
-            height: 30px;
-            position: relative;
-            margin: 30px auto;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .loading-fill {
-            background: var(--dark-pink);
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s;
-        }
-
-        .avatars-loading {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-            font-size: 32px;
-        }
-
-        /* Cards Estilo Stardew */
-        .stardew-card {
-            background: var(--stardew-card);
-            border: 4px solid var(--stardew-border);
-            border-radius: 8px;
-            padding: 20px;
-            margin: 15px 0;
-            width: 100%;
-            box-sizing: border-box;
-            box-shadow: 0 6px 0 rgba(0,0,0,0.3);
-        }
-
-        /* Grid de Ícones Menu Principal */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .menu-icon-card {
-            background: #3b1f3b;
-            border: 3px solid var(--primary-pink);
-            padding: 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
-        }
-
-        .menu-icon-card:hover {
-            background: var(--dark-pink);
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px var(--primary-pink);
-        }
-
-        /* Barras de Status */
-        .status-bar-container {
-            background: #1a0f1a;
-            border: 2px solid var(--primary-pink);
-            height: 20px;
-            width: 100%;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 8px 0;
-        }
-
-        .status-bar-fill {
-            background: var(--dark-pink);
-            height: 100%;
-            width: 0%;
-            transition: width 0.5s;
-        }
-
-        /* Polaroid */
-        .polaroid {
-            background: #fff;
-            color: #333;
-            padding: 15px 15px 30px 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            transform: rotate(-2deg);
-            margin: 20px auto;
-            max-width: 220px;
-        }
-        .polaroid img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border: 1px solid #ccc;
-        }
-
-        /* Corações Flutuantes */
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
-        }
-        .floating-heart {
-            position: absolute;
-            color: var(--primary-pink);
-            font-size: 24px;
-            animation: floatUp 1.5s linear forwards;
-            pointer-events: none;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Áudio de Fundo -->
-    <audio id="bgm" loop>
-        <source src="https://vgmsite.com/soundtracks/stardew-valley/nwmxywtiqe/1-01%20Title%20Theme.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- TELA 1: ENTER CODE -->
-    <div id="lock-screen" class="screen active-screen">
-        <h2>🔒 ENTER CODE</h2>
-        <p>Digite a senha secreta (Aniversário dele):</p>
-        <input type="password" id="pass-input" placeholder="••••">
-        <br>
-        <button class="pixel-btn" onclick="checkPassword()">Entrar</button>
-        <p id="error-msg" style="color: #ff6b6b; display: none; margin-top: 10px;">Senha incorreta, tente o ano correto!</p>
-    </div>
-
-    <!-- TELA 2: LOADING INTERATIVO -->
-    <div id="loading-screen" class="screen">
-        <h2>Carregando a nossa história...</h2>
-        <p id="loading-instruction">Clique na tela para aproximar Giorgio & Rafaella!</p>
-        <div class="avatars-loading">
-            <span id="avatar-g" style="transform: translateX(0px);">👦🏾</span>
-            <span id="avatar-r" style="transform: translateX(0px);">👧🏻</span>
-        </div>
-        <div class="loading-container">
-            <div id="loading-fill" class="loading-fill"></div>
-        </div>
-        <p id="loading-percent">0%</p>
-    </div>
-
-    <!-- TELA 3: MENU PRINCIPAL -->
-    <div id="main-menu" class="screen">
-        <div class="stardew-card">
-            <h1>Bem-vindos aos pombinhos rs 💖</h1>
-            <p>Nível de Amizade: <strong>Soulbound [99999/99999]</strong></p>
-        </div>
-        <div class="menu-grid">
-            <div class="menu-icon-card" onclick="openScreen('status-screen')">
-                <h3>📊 Player Status</h3>
-                <p>Estatísticas & Perfis</p>
-            </div>
-            <div class="menu-icon-card" onclick="openScreen('story-screen')">
-                <h3>📖 Main Story</h3>
-                <p>Nossa trajetória de amor</p>
-            </div>
-            <div class="menu-icon-card" onclick="openScreen('quests-screen')">
-                <h3>⚔️ Missões Multiplayer</h3>
-                <p>Main & Side Quests</p>
-            </div>
-            <div class="menu-icon-card" onclick="openScreen('music-screen')">
-                <h3>🎵 Trilha Sonora</h3>
-                <p>Músicas que lembram você</p>
-            </div>
-        </div>
-        <button class="pixel-btn" style="margin-top: 30px;" onclick="openScreen('final-screen')">Aventura Final 🌟</button>
-    </div>
-
-    <!-- TELA: PLAYER STATUS -->
-    <div id="status-screen" class="screen">
-        <h2>📊 Player Status</h2>
-        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-            <!-- Giorgio -->
-            <div class="stardew-card" style="flex: 1; min-width: 280px;">
-                <div class="polaroid">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Giorgio">
-                    <p style="margin:5px 0 0 0; font-size:20px;">Giorgio</p>
-                </div>
-                <p><strong>Level (Idade):</strong> 20 anos</p>
-                <p>Amor: ∞</p>
-                <div class="status-bar-container"><div class="status-bar-fill" style="width: 100%;"></div></div>
-                <p>Ciúme: 40%</p>
-                <div class="status-bar-container"><div class="status-bar-fill" style="width: 40%;"></div></div>
-                <p>Paciência: Infinita</p>
-                <div class="status-bar-container"><div class="status-bar-fill" style="width: 100%;"></div></div>
-            </div>
-            <!-- Rafaella -->
-            <div class="stardew-card" style="flex: 1; min-width: 280px;">
-                <div class="polaroid">
-                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Rafaella">
-                    <p style="margin:5px 0 0 0; font-size:20px;">Rafaella</p>
-                </div>
-                <p><strong>Level (Idade):</strong> 19 anos</p>
-                <p><strong>Papel:</strong> The Overthinker</p>
-                <p>Amor: ∞</p>
-                <div class="status-bar-container"><div class="status-bar-fill" style="width: 100%;"></div></div>
-                <p>Ciúme: 70%</p>
-                <div class="status-bar-container"><div class="status-bar-fill" style="width: 70%;"></div></div>
-                <p>Paciência: 60%</p>
-                <div class="status-bar-container"><div class="status-bar-fill" style="width: 60%;"></div></div>
-            </div>
-        </div>
-        <button class="pixel-btn" style="margin-top: 20px;" onclick="openScreen('main-menu')">Voltar ao Menu</button>
-    </div>
-
-    <!-- TELA: MAIN STORY -->
-    <div id="story-screen" class="screen">
-        <div class="stardew-card">
-            <h2 style="color: #ff6b6b;">⚠️ WARNING</h2>
-            <p>Esta página pode causar sorrisos excessivos e palpitações aceleradas!</p>
-            <p>Deseja continuar?</p>
-            <button class="pixel-btn" onclick="startStoryReading()">SIM</button>
-            <button class="pixel-btn" onclick="startStoryReading()">SIM</button>
-        </div>
-        <div id="story-content" style="display:none; text-align: left; line-height: 1.8; margin-top: 20px;" class="stardew-card">
-            <p style="text-align: center; font-style: italic;">Num simples olhar tudo começou,<br>Sem que eu percebesse, meu coração acelerou.</p>
-            <p style="text-align: right;">Entre conversas e risadas, uma amizade floresceu,<br>E, quando menos esperávamos, o amor nos escolheu.</p>
-            <p style="text-align: left;">O que era acaso virou destino,<br>E hoje agradeço por cruzarmos nossos caminhos.</p>
-            <p style="text-align: center;">E se o destino nos uniu assim,<br>Quero que ele te mantenha sempre perto de mim.</p>
-            <p style="text-align: right; font-weight: bold;">Pois entre tantas pessoas que eu poderia encontrar,<br>Foi você quem meu coração escolheu para amar.</p>
-            <button class="pixel-btn" style="display:block; margin: 20px auto;" onclick="openScreen('story-media')">Próximo ➔</button>
-        </div>
-        <button class="pixel-btn" style="margin-top: 20px;" onclick="openScreen('main-menu')">Voltar ao Menu</button>
-    </div>
-
-    <!-- TELA: STORY MEDIA (VÍDEO E MÚSICA) -->
-    <div id="story-media" class="screen">
-        <h2>Nossa Conexão em Vídeo</h2>
-        <div class="stardew-card">
-            <iframe width="1003" height="564" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Nossa História" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="max-width: 100%; border-radius: 4px;"></iframe>
-        </div>
-        <button class="pixel-btn" style="margin-top: 20px;" onclick="openScreen('main-menu')">Voltar ao Menu</button>
-    </div>
-
-    <!-- TELA: MISSÕES MULTIPLAYER -->
-    <div id="quests-screen" class="screen">
-        <h2>⚔️ Missões Multiplayer</h2>
-        <p>XP Total: <span id="xp-counter">0</span> / 1150 XP</p>
-        <div class="status-bar-container"><div id="xp-bar" class="status-bar-fill" style="width: 0%;"></div></div>
-        
-        <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 15px;">
-            <div class="stardew-card" style="flex: 2; text-align: left;">
-                <h3>Main Quests</h3>
-                <label><input type="checkbox" class="main-quest" value="50" onchange="updateXP()"> Primeira ligação na madrugada (50 XP)</label><br>
-                <label><input type="checkbox" class="main-quest" value="100" onchange="updateXP()"> Aprender os hábitos do outro (100 XP)</label><br>
-                <label><input type="checkbox" class="main-quest" value="200" onchange="updateXP()"> Lidar com mal-entendidos (200 XP)</label><br>
-                <label><input type="checkbox" class="main-quest" value="150" onchange="updateXP()"> Crescer juntos (150 XP)</label><br>
-                <label><input type="checkbox" class="main-quest" value="150" onchange="updateXP()"> Planejar o futuro (150 XP)</label><br>
-                <label><input type="checkbox" class="main-quest" value="150" onchange="updateXP()"> Confiar (150 XP)</label><br>
-                <label><input type="checkbox" class="main-quest" value="200" onchange="updateXP()"> Promessas e declarações de amor (200 XP)</label>
-            </div>
-            <div class="stardew-card" style="flex: 1; font-size: 20px; text-align: left;">
-                <h4 style="margin-top:0;">Side Quests</h4>
-                <p>🔹 Mensagens de bom dia e boa noite</p>
-                <p>🔹 Músicas compartilhadas</p>
-                <p>🔹 "Call?"</p>
-                <p>🔹 Fotos sem contexto</p>
-                <p>🔹 Atualizações durante o dia</p>
-            </div>
-        </div>
-        <p id="lock-msg" style="color: #ff6b6b; margin-top: 10px;">Recurso bloqueado até o progresso completo!</p>
-        <div id="secret-letter" class="stardew-card" style="display: none; background: #fff; color: #333; border: 4px dashed var(--dark-pink); position: relative; animation: popIn 0.5s;">
-            <h3>💌 Carta Especial Desbloqueada!</h3>
-            <p>"Meu amor, completar cada missão com você é a melhor aventura da minha vida..."</p>
-        </div>
-        <button class="pixel-btn" style="margin-top: 20px;" onclick="openScreen('main-menu')">Voltar ao Menu</button>
-    </div>
-
-    <!-- TELA: MÚSICA -->
-    <div id="music-screen" class="screen">
-        <h2>🎵 Trilha Sonora</h2>
-        <div class="stardew-card">
-            <p>A melodia que seus acordes carregam e as notas que me lembram você.</p>
-            <a href="https://open.spotify.com" target="_blank" class="pixel-btn" style="text-decoration: none; display: inline-block; margin: 15px 0;">Abrir no Spotify 🎧</a>
-        </div>
-        <button class="pixel-btn" style="margin-top: 20px;" onclick="openScreen('main-menu')">Voltar ao Menu</button>
-    </div>
-
-    <!-- TELA: FINAL -->
-    <div id="final-screen" class="screen">
-        <h2>🌟 Nossa Aventura Juntos</h2>
-        <div class="stardew-card">
-            <div style="font-size: 50px; margin: 20px;">👩‍❤️‍👨</div>
-            <p>Giorgio & Rafaella</p>
-            <p>Obrigada por cada momento ao meu lado.</p>
-        </div>
-        <button class="pixel-btn" onclick="location.reload()">Reiniciar Aventura 🔄</button>
-    </div>
-
-    <script>
-        let clickCount = 0;
-        const maxClicks = 10;
-
-        function checkPassword() {
-            let pass = document.getElementById('pass-input').value.trim();
-            if(pass === "2011") {
-                document.getElementById('lock-screen').classList.remove('active-screen');
-                document.getElementById('loading-screen').classList.add('active-screen');
-                
-                // Tenta tocar a música de fundo
-                let audio = document.getElementById('bgm');
-                audio.play().catch(e => console.log("Audio play blocked"));
-            } else {
-                document.getElementById('error-msg').style.display = 'block';
-            }
-        }
-
-        // Interação de loading com cliques
-        document.getElementById('loading-screen').addEventListener('click', function(e) {
-            if(clickCount < maxClicks) {
-                clickCount++;
-                let percent = (clickCount / maxClicks) * 100;
-                document.getElementById('loading-fill').style.width = percent + '%';
-                document.getElementById('loading-percent').innerText = percent + '%';
-
-                // Aproxima os avatares
-                let moveDist = clickCount * 18;
-                document.getElementById('avatar-g').style.transform = `translateX(${moveDist}px)`;
-                document.getElementById('avatar-r').style.transform = `translateX(-${moveDist}px)`;
-
-                // Criação de corações flutuantes ao clicar
-                createHeart(e.clientX, e.clientY);
-
-                if(clickCount === maxClicks) {
-                    document.getElementById('loading-instruction').innerText = "💖 Beijo concluído! Entrando no mundo...";
-                    setTimeout(() => {
-                        openScreen('main-menu');
-                    }, 1500);
-                }
-            }
-        });
-
-        function createHeart(x, y) {
-            let heart = document.createElement('div');
-            heart.className = 'floating-heart';
-            heart.innerHTML = '❤️';
-            heart.style.left = (x || window.innerWidth/2) + 'px';
-            heart.style.top = (y || window.innerHeight/2) + 'px';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 1500);
-        }
-
-        function openScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active-screen'));
-            document.getElementById(screenId).classList.add('active-screen');
-        }
-
-        function startStoryReading() {
-            document.getElementById('story-content').style.display = 'block';
-        }
-
-        function updateXP() {
-            let checkboxes = document.querySelectorAll('.main-quest');
-            let totalXP = 0;
-            checkboxes.forEach(cb => {
-                if(cb.checked) totalXP += parseInt(cb.value);
-            });
-            
-            let maxXP = 1150;
-            let percent = (totalXP / maxXP) * 100;
-            document.getElementById('xp-counter').innerText = totalXP;
-            document.getElementById('xp-bar').style.width = percent + '%';
-
-            if(totalXP >= maxXP) {
-                document.getElementById('lock-msg').style.display = 'none';
-                document.getElementById('secret-letter').style.display = 'block';
-            } else {
-                document.getElementById('lock-msg').style.display = 'block';
-                document.getElementById('secret-letter').style.display = 'none';
-            }
-        }
-    </script>
-</body>
-</html>
