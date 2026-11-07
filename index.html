@@ -13,6 +13,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
+    /* Animação dos corações ao clicar */
+.click-heart {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  animation: floatUp 1s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+  }
+  50% {
+    transform: translate(-50%, -100px) scale(1.2) rotate(15deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -150px) scale(0.8) rotate(-15deg);
+  }
+}
+
+/* Brilho delicado ao redor do cursor */
+body {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23eb3f84"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'), auto;
+}
     /* ----------------------------------------------------
        ANIMAÇÃO DO CORAÇÃO DE FUNDO (Ajustado para maior visibilidade)
        ---------------------------------------------------- */
@@ -162,7 +189,7 @@
   <!-- ÁUDIO DE FUNDO -->
   <!-- EDITAR AQUI: MÚSICA DE FUNDO (Substitua a URL do arquivo mp3 caso queira sua própria música) -->
   <audio id="bgAudio" loop autoplay>
-    <source src="..." type="audio/mpeg">
+    <source src="https://open.spotify.com/intl-pt/track/0zLs0xjw4MYcMiXHsOvSgk?si=57289d4759f64aed" type="audio/mpeg">
     Seu navegador não suporta áudio HTML5.
   </audio>
 
@@ -187,7 +214,7 @@
 
         <!-- EDITAR AQUI: MENSAGEM DE BOAS-VINDAS / HOMENAGEM -->
         <p class="text-base sm:text-lg text-gray-600 max-w-lg mx-auto leading-relaxed pt-2">
-          Hoje, no seu aniversário, queria te devolver um pouquinho da felicidade que você traz nos meus dias!
+          Hoje queria te devolver um pouquinho da felicidade que você traz nos meus dias!
         </p>
       </section>
 
@@ -243,17 +270,21 @@
           <p class="font-handwriting text-3xl text-pink-600 font-bold">Meu amor eterno,</p>
           
           <p class="text-gray-700 leading-relaxed text-sm sm:text-base">
-            ...
+            Amor,
+            Parece até injusto tentar colocar em apenas algumas palavras tudo aquilo que sinto por você, como eu falo e reforço outra vez, eu poderia passar horas tentando encontrar termos certos para expressar o tamanho do amor que sinto por você, mas ainda assim tenho a sensação de que nenhum seria suficiente. É o seu aniversário, mas quem ganhou o maior presente do mundo sou eu por ter você na minha vida. Há 2 décadas (em décadas pra você se sentir velho) nasceu quem se tornaria o meu mundo, um homem admirável por ser tão generoso, carinhoso, amável, protetor... Eu poderia facilmente continuar por um bom tempo, mas acho que seria tedioso para você ler uma enciclopédia de adjetivos seus. Meu amor, eu diria que você merece tudo de mais lindo que o mundo poderia te oferecer, mas você merece mais do que isso. Eu desejo que a vida seja gentil com você, que seus sonhos encontrem caminhos para se realizar por que se meu amor quer, ele tem que ter. Desejo que você consiga enxergar em si mesmo todas as qualidades que eu vejo.
           </p>
           <p class="text-gray-700 leading-relaxed text-sm sm:text-base">
-             ...
+             Vou tomar a liberdade de fazer desejos, mesmo que o dia seja seu. Quero que você nunca se esqueça do quanto é amado, admirado e importante não apenas por mim, mas por quem teve a sorte de conhecer o coração tão bonito que você carrega. Você é um homem que me inspira, que me faz sentir orgulho, principalmente pelo homem que continua se tornando a cada dia. Quero que você esteja preparado para continuar me suportando por muitos e muitos anos, porque pretendo permanecer ao seu lado por tempo indeterminado. Na verdade, indeterminado não, até que a morte não seja capaz de nos separar e nos encontremos novamente como robores, como você disse. rafatron e giotron.
+Não te amo apenas porque é meu namorado, porque eu te admiro ou porque tenho uma tendência bastante suspeita de achar tudo o que você faz encantador, atraente, sedutor, charmoso, deslumbrante, lindo, perfeito... Bom rs... Eu te amo pela pessoa que você é. Sua essência, seus valores, seu coração e a maneira como você vê o mundo. Quero que possa sonhar, que confie na sua capacidade e que nunca duvide de que merece viver coisas boas. E, se em algum momento você se sentir ansioso, duvidar ou achar que fica para trás, estarei aqui para te lembrar, tranquilizar ou distrair dessas xurumelas.
           </p>
           <p class="text-gray-700 leading-relaxed text-sm sm:text-base">
-            ...
+            Quero continuar vivendo essas pequenas felicidades ao seu lado. Que eu pudesse continuar te abraçando depois de um dia cansativo, cuidando de você e nunca cansando de demonstrar o quanto sou apaixonada por você. Eu amo estar com você. Amo nossas conversas, amo ouvir você falar sobre as coisas que gosta mesmo que eu não entenda nada, amo nossas risadas, nossos carinhos e até os momentos em que não precisamos fazer absolutamente nada além de estar juntos. Então, para findar este suplício que tanto funesta minha existência, elevar-me-ei ao suprassumo deleite de devotar-me ao meu estimado amor, cuja excelsa presença constitui o mais sublime bálsamo para minha alma, sendo-me impossível resistir ao inefável regozijo de desfrutar de sua adorável companhia e entregar-me aos seus afetuosos desvelos.
+Eu te amo muito, Giorgio. Feliz aniversário, meu amor ❤️
           </p>
 
           <p class="text-right font-handwriting text-2xl text-pink-600 font-bold mt-6">
-            Com todo o meu amor e carinho ❤️
+            Com todo amor e carinho
+            Rafaella ❤️
           </p>
         </div>
       </section>
@@ -309,7 +340,7 @@
 
           <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
             <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
-            <span>Rir até chorar e a barriga doer da piada mais besta possível</span>
+            <span>Rir até chorar e a barriga doer</span>
           </label>
 
           <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
@@ -324,7 +355,7 @@
 
            <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
             <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
-            <span>Ter uma namorada que ama tanto que aprende html em um mês para impressionar seu amado</span>
+            <span>Batalhar com códigos para impressionar seu amor</span>
           </label>
         </div>
 
@@ -335,8 +366,7 @@
           </span>
           <h3 class="font-handwriting text-3xl text-pink-600 font-bold">Uma breve declaração</h3>
           <p class="text-sm text-gray-700 leading-relaxed italic">
-            "O que era acaso virou destino, e hoje agradeço por cruzarmos nossos caminhos.<br>
-            Se o destino nos uniu assim, quero que ele te mantenha sempre perto de mim.<br>
+            "Se o destino nos uniu assim, quero que ele te mantenha sempre perto de mim.<br>
             Pois entre tantas pessoas que eu poderia encontrar, foi você quem meu coração escolheu para amar."
           </p>
         </div>
@@ -354,7 +384,7 @@
         <!-- EDITAR AQUI: LINK DA PLAYLIST OU EMBED DO SPOTIFY -->
         <!-- Você pode substituir o iframe abaixo pelo código de "Incorporar" da sua playlist do Spotify -->
         <div class="rounded-2xl overflow-hidden shadow-md">
-          <iframe style="border-radius:12px" src="..." width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <iframe style="border-radius:12px" src="https://open.spotify.com/playlist/6MazgS07NwmREMLEcPOb4l?si=9ewxIqnqRZWlLPraVtPHsQ&utm_source=copy-link&pt=faf070180438eb797baaf19d42dc551f&pi=MwqPHDAmRRKSy" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
 
         <!-- Link Direto como alternativa -->
@@ -492,6 +522,20 @@
         musicText.innerText = 'Tocar Música';
       }
     }
+    // Efeito de corações ao clicar em qualquer lugar da tela
+document.addEventListener('click', function(e) {
+  const heart = document.createElement('div');
+  heart.className = 'click-heart';
+  heart.innerHTML = '❤️';
+  heart.style.left = e.clientX + 'px';
+  heart.style.top = e.clientY + 'px';
+  heart.style.fontSize = (Math.random() * 12 + 16) + 'px'; // Tamanhos variados
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 1000);
+});
   </script>
 </body>
 </html>
