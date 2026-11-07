@@ -1,458 +1,482 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stardew Valley - Giorgio & Rafaella</title>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --stardew-wood: #8b4513;
-            --stardew-dark-wood: #5c2e0b;
-            --stardew-border: #e6c280;
-            --stardew-bg: #f4e4bc;
-            --pink-accent: #ffb7c5;
-            --dark-pink: #d87093;
-            --text-color: #4a2e1b;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feliz Aniversário, Amor!</title>
+  
+  <!-- Tailwind CSS para estilização moderna e responsiva -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome para ícones fofos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Fontes Google delicadas -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ----------------------------------------------------
+       ANIMAÇÃO DO CORAÇÃO DE FUNDO (Tamanho Expandido)
+       ---------------------------------------------------- */
+    :root {
+      --valentines: #eb3f84;
+    }
 
-        body {
-            background-color: #2b1d14;
-            background-image: radial-gradient(circle, #422a1d 10%, #2b1d14 90%);
-            color: var(--text-color);
-            font-family: 'VT323', monospace;
-            font-size: 24px;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        /* Container Principal com Moldura de Madeira Stardew */
-        .stardew-box {
-            background-color: var(--stardew-bg);
-            border: 6px solid var(--stardew-wood);
-            outline: 3px solid var(--stardew-border);
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.6);
-            border-radius: 8px;
-            padding: 25px;
-            width: 100%;
-            max-width: 750px;
-            text-align: center;
-            position: relative;
-            margin-bottom: 20px;
-        }
+    html, body {
+      overflow-x: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
 
-        .pixel-btn {
-            background: linear-gradient(180deg, #ff91a4 0%, var(--dark-pink) 100%);
-            color: #ffffff;
-            border: 4px solid var(--stardew-wood);
-            outline: 2px solid var(--stardew-border);
-            padding: 10px 24px;
-            font-family: 'VT323', monospace;
-            font-size: 26px;
-            cursor: pointer;
-            box-shadow: 0 4px 0 var(--stardew-dark-wood);
-            margin: 8px;
-            text-shadow: 2px 2px #000;
-            transition: transform 0.1s, filter 0.1s;
-        }
+    html {
+      animation: html-bg 5s ease infinite;
+    }
 
-        .pixel-btn:hover {
-            filter: brightness(1.15);
-            transform: scale(1.04);
-        }
+    .heart-bg-wrapper {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.65;
+    }
 
-        .pixel-btn:active {
-            transform: scale(0.96);
-            box-shadow: 0 1px 0 var(--stardew-dark-wood);
-        }
+    /* Coração maior conforme pedido */
+    .heart {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      background: var(--valentines);
+      transform: rotate(45deg);
+      animation: heart 5s ease infinite;
+    }
 
-        .screen {
-            display: none;
-            width: 100%;
-            flex-direction: column;
-            align-items: center;
-        }
+    .heart:before,
+    .heart:after {
+      content: "";
+      width: 260px;
+      height: 260px;
+      position: absolute;
+      background: var(--valentines);
+      border-radius: 260px;
+      transition: 1s ease all;
+    }
 
-        .active-screen {
-            display: flex;
-        }
+    .heart:before {
+      top: -130px;
+      left: 0;
+      animation: left 5s ease infinite;
+    }
 
-        /* Inputs */
-        input[type="password"] {
-            background-color: #fff8e7;
-            border: 4px solid var(--stardew-wood);
-            color: var(--stardew-dark-wood);
-            font-family: 'VT323', monospace;
-            font-size: 28px;
-            text-align: center;
-            padding: 8px;
-            width: 200px;
-            margin: 15px 0;
-            outline: none;
-        }
+    .heart:after {
+      left: 130px;
+      top: 0;
+      animation: right 5s ease infinite;
+    }
 
-        /* Loading com Avatares */
-        .loading-bar-container {
-            width: 100%;
-            max-width: 500px;
-            background: var(--stardew-dark-wood);
-            border: 4px solid var(--stardew-wood);
-            height: 32px;
-            position: relative;
-            margin: 25px auto;
-            border-radius: 4px;
-            overflow: hidden;
-        }
+    @keyframes heart {
+      0% { transform: rotate(0deg); border-radius: 260px; background: #fff; }
+      30% { transform: rotate(45deg); border-radius: 16px; }
+      50% { background: var(--valentines); }
+      70% { transform: rotate(45deg); border-radius: 16px; }
+      100% { transform: rotate(90deg); border-radius: 260px; background: #fff; }
+    }
 
-        .loading-bar-fill {
-            background: linear-gradient(90deg, #ffb7c5, #d87093);
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s;
-        }
+    @keyframes left {
+      0% { top: 0; background: #fff; }
+      30% { top: -130px; }
+      50% { background: var(--valentines); }
+      70% { top: -130px; }
+      100% { top: 0; background: #fff; }
+    }
 
-        .avatar-container {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 500px;
-            font-size: 40px;
-            margin: 10px auto;
-        }
+    @keyframes right {
+      0% { left: 0; background: #fff; }
+      30% { left: -130px; }
+      50% { background: var(--valentines); }
+      70% { left: -130px; }
+      100% { left: 0; background: #fff; }
+    }
 
-        /* Grid do Menu */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-            width: 100%;
-            margin-top: 15px;
-        }
+    @keyframes html-bg {
+      0% { background: var(--valentines); }
+      50% { background: #ffffff; }
+      100% { background: var(--valentines); }
+    }
 
-        .menu-card {
-            background: #ffe6d0;
-            border: 4px solid var(--stardew-wood);
-            padding: 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
+    /* ESTILOS DE VIDRO E FONTE */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 25px 50px -12px rgba(235, 63, 132, 0.25);
+    }
 
-        .menu-card:hover {
-            background: #ffd3b6;
-            transform: translateY(-3px);
-        }
+    .font-handwriting {
+      font-family: 'Dancing Script', cursive;
+    }
 
-        /* Polaroid e Status */
-        .polaroid-frame {
-            background: #fff;
-            padding: 12px 12px 25px 12px;
-            border: 3px solid var(--stardew-dark-wood);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            max-width: 200px;
-            margin: 10px auto;
-            transform: rotate(-2deg);
-        }
+    .font-delicate {
+      font-family: 'Caveat', cursive;
+    }
 
-        .polaroid-frame img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border: 1px solid #ddd;
-        }
+    /* Checkbox personalizado */
+    .custom-checkbox:checked {
+      background-color: #eb3f84;
+      border-color: #eb3f84;
+    }
 
-        .status-bar {
-            background: var(--stardew-dark-wood);
-            border: 2px solid var(--stardew-wood);
-            height: 18px;
-            border-radius: 9px;
-            overflow: hidden;
-            margin: 5px 0 15px 0;
-        }
+    /* Animações suaves de fade */
+    .fade-in {
+      animation: fadeIn 0.5s ease-in-out forwards;
+    }
 
-        .status-fill {
-            background: var(--dark-pink);
-            height: 100%;
-        }
-
-        /* Corações Animação */
-        .floating-heart {
-            position: absolute;
-            font-size: 28px;
-            animation: floatUp 1.2s ease-out forwards;
-            pointer-events: none;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(0.8); opacity: 1; }
-            100% { transform: translateY(-80px) scale(1.4); opacity: 0; }
-        }
-    </style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
-<body>
+<body class="relative min-h-screen flex flex-col items-center justify-start p-3 sm:p-8">
 
-    <audio id="bgm" loop>
-        <source src="https://vgmsite.com/soundtracks/stardew-valley/nwmxywtiqe/1-01%20Title%20Theme.mp3" type="audio/mpeg">
-    </audio>
+  <!-- Animação do Coração no Fundo -->
+  <div class="heart-bg-wrapper">
+    <div class="heart"></div>
+  </div>
 
-    <!-- TELA 1: ENTER CODE -->
-    <div id="lock-screen" class="stardew-box screen active-screen">
-        <h2 style="color: var(--stardew-dark-wood); margin-top:0;">🔒 ENTER CODE</h2>
-        <p>Digite a senha secreta (aniversário dele):</p>
-        <input type="password" id="pass-input" maxlength="4" placeholder="••••">
-        <br>
-        <button class="pixel-btn" onclick="checkPassword()">Desbloquear</button>
-        <p id="error-msg" style="color: #b22222; display: none; font-weight: bold;">Código incorreto! Tente novamente.</p>
-    </div>
+  <!-- Player de Música Flutuante no Canto Inferior Direito -->
+  <div class="fixed bottom-4 right-4 z-50">
+    <button id="musicToggleBtn" onclick="toggleAudio()" class="flex items-center gap-2 bg-pink-600 hover:bg-pink-700 text-white text-xs sm:text-sm font-medium px-4 py-3 rounded-full shadow-xl transition transform hover:scale-105 active:scale-95">
+      <i id="musicIcon" class="fa-solid fa-music animate-spin"></i>
+      <span id="musicText">Pausar Música</span>
+    </button>
+  </div>
 
-    <!-- TELA 2: LOADING INTERATIVO -->
-    <div id="loading-screen" class="stardew-box screen">
-        <h2>A carregar o save file de Giorgio & Rafaella...</h2>
-        <p id="loading-text">Clica repetidamente na tela para aproximares o casal!</p>
+  <!-- ÁUDIO DE FUNDO -->
+  <!-- EDITAR AQUI: MÚSICA DE FUNDO (Substitua a URL do arquivo mp3 caso queira sua própria música) -->
+  <audio id="bgAudio" loop autoplay>
+    <source src="..." type="audio/mpeg">
+    Seu navegador não suporta áudio HTML5.
+  </audio>
+
+  <!-- Conteúdo Principal -->
+  <main class="relative z-10 w-full max-w-3xl my-4 sm:my-8 space-y-8">
+
+    <!-- CARTÃO PRINCIPAL -->
+    <div class="glass-card rounded-3xl p-6 sm:p-12 text-slate-800 space-y-10">
+
+      <!-- 1. SEÇÃO DE ANIVERSÁRIO (CABEÇALHO) -->
+      <section class="text-center space-y-3 border-b border-pink-100 pb-8">
         
-        <div class="avatar-container">
-            <span id="char-g" style="transition: transform 0.2s;">👦🏾</span>
-            <span id="char-r" style="transition: transform 0.2s;">👧🏻</span>
-        </div>
+        <!-- EDITAR AQUI: DATA DELICADA NO TOPO -->
+        <span class="inline-block font-delicate text-2xl sm:text-3xl text-pink-600 tracking-wide font-bold">
+           20 de Novembro 
+        </span>
 
-        <div class="loading-bar-container">
-            <div id="loading-fill" class="loading-bar-fill"></div>
-        </div>
-        <p id="loading-percent" style="font-weight: bold;">0%</p>
-    </div>
+        <!-- EDITAR AQUI: TÍTULO PRINCIPAL -->
+        <h1 class="text-4xl sm:text-6xl font-bold text-gray-900 font-handwriting leading-tight">
+          Parabéns!
+        </h1>
 
-    <!-- TELA 3: MENU PRINCIPAL -->
-    <div id="main-menu" class="stardew-box screen">
-        <h1 style="margin-top: 0; color: var(--stardew-dark-wood);">Bem-vindos aos pombinhos rs 🌾💖</h1>
-        <p style="font-size: 26px;">Friendship Level: <strong>SOULBOUND [99999/99999]</strong></p>
-        
-        <div class="menu-grid">
-            <div class="menu-card" onclick="openScreen('status-screen')">
-                <h3>📊 Player Status</h3>
-                <p>Estatísticas & Perfis</p>
-            </div>
-            <div class="menu-card" onclick="openScreen('story-screen')">
-                <h3>📖 Main Story</h3>
-                <p>Nossa História</p>
-            </div>
-            <div class="menu-card" onclick="openScreen('quests-screen')">
-                <h3>⚔️ Missões Multiplayer</h3>
-                <p>Main & Side Quests</p>
-            </div>
-            <div class="menu-card" onclick="openScreen('music-screen')">
-                <h3>🎵 Trilha Sonora</h3>
-                <p>Músicas Especiais</p>
-            </div>
-        </div>
-        <button class="pixel-btn" style="margin-top: 25px;" onclick="openScreen('final-screen')">Aventura Final 🌟</button>
-    </div>
+        <!-- EDITAR AQUI: MENSAGEM DE BOAS-VINDAS / HOMENAGEM -->
+        <p class="text-base sm:text-lg text-gray-600 max-w-lg mx-auto leading-relaxed pt-2">
+          Hoje, no seu aniversário, queria te devolver um pouquinho da felicidade que você trouxe para a minha vida.
+        </p>
+      </section>
 
-    <!-- TELA: PLAYER STATUS -->
-    <div id="status-screen" class="stardew-box screen">
-        <h2>📊 Player Status</h2>
-        <div style="display: flex; gap: 15px; flex-wrap: wrap; width: 100%; justify-content: center;">
-            <!-- Giorgio -->
-            <div style="background: #ffe6d0; border: 3px solid var(--stardew-wood); padding: 15px; border-radius: 6px; flex: 1; min-width: 260px;">
-                <div class="polaroid-frame">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Giorgio">
-                    <p style="margin: 5px 0 0 0; font-weight: bold; color: #333;">Giorgio</p>
-                </div>
-                <p><strong>Level (Idade):</strong> 20</p>
-                <p>Amor: ∞</p>
-                <div class="status-bar"><div class="status-fill" style="width: 100%;"></div></div>
-                <p>Ciúme: 40%</p>
-                <div class="status-bar"><div class="status-fill" style="width: 40%;"></div></div>
-                <p>Paciência: Infinita</p>
-                <div class="status-bar"><div class="status-fill" style="width: 100%;"></div></div>
-            </div>
-
-            <!-- Rafaella -->
-            <div style="background: #ffe6d0; border: 3px solid var(--stardew-wood); padding: 15px; border-radius: 6px; flex: 1; min-width: 260px;">
-                <div class="polaroid-frame">
-                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Rafaella">
-                    <p style="margin: 5px 0 0 0; font-weight: bold; color: #333;">Rafaella</p>
-                </div>
-                <p><strong>Level (Idade):</strong> 19</p>
-                <p><strong>Papel:</strong> The Overthinker</p>
-                <p>Amor: ∞</p>
-                <div class="status-bar"><div class="status-fill" style="width: 100%;"></div></div>
-                <p>Ciúme: 70%</p>
-                <div class="status-bar"><div class="status-fill" style="width: 70%;"></div></div>
-                <p>Paciência: 60%</p>
-                <div class="status-bar"><div class="status-fill" style="width: 60%;"></div></div>
-            </div>
-        </div>
-        <button class="pixel-btn" style="margin-top: 20px;" onclick="openScreen('main-menu')">Voltar ao Menu</button>
-    </div>
-
-    <!-- TELA: MAIN STORY -->
-    <div id="story-screen" class="stardew-box screen">
-        <h2 style="color: #b22222;">⚠️ WARNING</h2>
-        <p>Esta página pode causar sorrisos excessivos e palpitações aceleradas!</p>
+      <!-- 2. CONTADOR DE EXISTÊNCIA (Nasceu em 20/11/2006 às 21:11) -->
+      <section class="bg-white/70 rounded-3xl p-6 border border-pink-100 text-center shadow-sm space-y-4">
         <div>
-            <button class="pixel-btn" onclick="showStoryText()">SIM</button>
-            <button class="pixel-btn" onclick="showStoryText()">SIM</button>
+          <h2 class="text-sm uppercase font-bold text-pink-600 tracking-wider">Desde o instante em que o mundo ganhou você</h2>
+          <p class="text-xs text-gray-500 mt-0.5">Fazendo do mundo um lugar mais bonito há...</p>
         </div>
 
-        <div id="story-body" style="display: none; margin-top: 20px; text-align: left; background: #fff8e7; border: 3px solid var(--stardew-wood); padding: 20px; border-radius: 6px;">
-            <p style="text-align: center;">Num simples olhar tudo começou,<br>Sem que eu percebesse, meu coração acelerou.</p>
-            <p style="text-align: right;">Entre conversas e risadas, uma amizade floresceu,<br>E, quando menos esperávamos, o amor nos escolheu.</p>
-            <p style="text-align: left;">O que era acaso virou destino,<br>E hoje agradeço por cruzarmos nossos caminhos.</p>
-            <p style="text-align: center;">E se o destino nos uniu assim,<br>Quero que ele te mantenha sempre perto de mim.</p>
-            <p style="text-align: right; font-weight: bold;">Pois entre tantas pessoas que eu poderia encontrar,<br>Foi você quem meu coração escolheu para amar.</p>
-            
-            <button class="pixel-btn" style="display: block; margin: 20px auto 0 auto;" onclick="openScreen('story-video')">Próximo ➔</button>
+        <div class="grid grid-cols-5 gap-2 sm:gap-3 text-center" id="existenceCounter">
+          <div class="bg-pink-50/80 p-2 sm:p-4 rounded-2xl border border-pink-100">
+            <span id="years" class="block text-xl sm:text-3xl font-bold text-pink-600">00</span>
+            <span class="text-[10px] sm:text-xs text-gray-500 font-medium">Anos</span>
+          </div>
+          <div class="bg-pink-50/80 p-2 sm:p-4 rounded-2xl border border-pink-100">
+            <span id="days" class="block text-xl sm:text-3xl font-bold text-pink-600">00</span>
+            <span class="text-[10px] sm:text-xs text-gray-500 font-medium">Dias</span>
+          </div>
+          <div class="bg-pink-50/80 p-2 sm:p-4 rounded-2xl border border-pink-100">
+            <span id="hours" class="block text-xl sm:text-3xl font-bold text-pink-600">00</span>
+            <span class="text-[10px] sm:text-xs text-gray-500 font-medium">Horas</span>
+          </div>
+          <div class="bg-pink-50/80 p-2 sm:p-4 rounded-2xl border border-pink-100">
+            <span id="minutes" class="block text-xl sm:text-3xl font-bold text-pink-600">00</span>
+            <span class="text-[10px] sm:text-xs text-gray-500 font-medium">Minutos</span>
+          </div>
+          <div class="bg-pink-50/80 p-2 sm:p-4 rounded-2xl border border-pink-100">
+            <span id="seconds" class="block text-xl sm:text-3xl font-bold text-pink-600">00</span>
+            <span class="text-[10px] sm:text-xs text-gray-500 font-medium">Segundos</span>
+          </div>
         </div>
-        <button class="pixel-btn" style="margin-top: 20px;" onclick="openScreen('main-menu')">Voltar ao Menu</button>
-    </div>
+      </section>
 
-    <!-- TELA: STORY VIDEO -->
-    <div id="story-video" class="stardew-box screen">
-        <h2>O Nosso Vídeo</h2>
-        <div style="width: 100%; max-width: 560px; margin: 0 auto;">
-            <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen style="border: 4px solid var(--stardew-wood); border-radius: 6px;"></iframe>
-        </div>
-        <button class="pixel-btn" style="margin-top: 20px;" onclick="openScreen('main-menu')">Voltar ao Menu</button>
-    </div>
-
-    <!-- TELA: MISSÕES MULTIPLAYER -->
-    <div id="quests-screen" class="stardew-box screen">
-        <h2>⚔️ Missões Multiplayer</h2>
-        <p>XP Total: <span id="xp-text">0</span> / 1150 XP</p>
-        <div class="status-bar" style="height: 22px; width: 100%; max-width: 400px; margin: 0 auto;"><div id="xp-fill" class="status-fill" style="width: 0%;"></div></div>
-
-        <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px; text-align: left; width: 100%;">
-            <div style="background: #ffe6d0; border: 3px solid var(--stardew-wood); padding: 15px; border-radius: 6px; flex: 2; min-width: 280px;">
-                <h3 style="margin-top:0;">Main Quests</h3>
-                <label><input type="checkbox" class="m-quest" value="50" onchange="calcXP()"> Primeira ligação na madrugada (50 XP)</label><br>
-                <label><input type="checkbox" class="m-quest" value="100" onchange="calcXP()"> Aprender os hábitos do outro (100 XP)</label><br>
-                <label><input type="checkbox" class="m-quest" value="200" onchange="calcXP()"> Lidar com mal-entendidos (200 XP)</label><br>
-                <label><input type="checkbox" class="m-quest" value="150" onchange="calcXP()"> Crescer juntos (150 XP)</label><br>
-                <label><input type="checkbox" class="m-quest" value="150" onchange="calcXP()"> Planejar o futuro (150 XP)</label><br>
-                <label><input type="checkbox" class="m-quest" value="150" onchange="calcXP()"> Confiar (150 XP)</label><br>
-                <label><input type="checkbox" class="m-quest" value="200" onchange="calcXP()"> Promessas e declarações de amor (200 XP)</label>
-            </div>
-            <div style="background: #ffe6d0; border: 3px solid var(--stardew-wood); padding: 15px; border-radius: 6px; flex: 1; min-width: 200px; font-size: 20px;">
-                <h4 style="margin-top:0;">Side Quests</h4>
-                <p>🔹 Mensagens de bom dia/noite</p>
-                <p>🔹 Músicas compartilhadas</p>
-                <p>🔹 "Call?"</p>
-                <p>🔹 Fotos sem contexto</p>
-                <p>🔹 Atualizações do dia</p>
-            </div>
+      <!-- 3. SEÇÃO DA CARTA DE AMOR INTERATIVA -->
+      <section class="space-y-4">
+        <div class="text-center">
+          <h2 class="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-envelope text-pink-500"></i> Algo para você
+          </h2>
+          <p class="text-xs text-gray-500">Clique para abrir a carta</p>
         </div>
 
-        <p id="quest-lock" style="color: #b22222; margin-top: 15px; font-weight: bold;">Recurso bloqueado até o progresso completo!</p>
-        
-        <div id="letter-unlocked" style="display: none; background: #fff8e7; border: 4px dashed var(--dark-pink); padding: 20px; border-radius: 6px; margin-top: 15px;">
-            <h3>💌 NOVO RECURSO DESBLOQUEADO!</h3>
-            <p>"Carta Secreta: O teu amor é o meu maior prémio nesta aventura..."</p>
+        <!-- Botão de Abertura -->
+        <button onclick="askToOpenLetter()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-semibold flex items-center justify-center gap-3 shadow-lg shadow-pink-500/25 transition transform active:scale-98">
+          <i class="fa-solid fa-heart"></i>
+          <span>Abrir</span>
+        </button>
+
+        <!-- Carta Escondida (Aparece após o alerta de confirmação) -->
+        <div id="secretLetter" class="hidden bg-white/95 p-6 sm:p-8 rounded-3xl border border-pink-200 shadow-md space-y-4 fade-in">
+          <!-- EDITAR AQUI: SUA CARTA DE AMOR (Escreva o que desejar entre as tags <p>) -->
+          <p class="font-handwriting text-3xl text-pink-600 font-bold">Meu amor eterno,</p>
+          
+          <p class="text-gray-700 leading-relaxed text-sm sm:text-base">
+            ...
+          </p>
+          <p class="text-gray-700 leading-relaxed text-sm sm:text-base">
+            ...
+          </p>
+          <p class="text-gray-700 leading-relaxed text-sm sm:text-base">
+            ...
+          </p>
+
+          <p class="text-right font-handwriting text-2xl text-pink-600 font-bold mt-6">
+            Com todo o meu amor e carinho ❤️
+          </p>
+        </div>
+      </section>
+
+      <!-- 4. CHECKLIST DO CASAL + BARRA DE PROGRESSO -->
+      <section class="space-y-5 bg-white/60 p-6 rounded-3xl border border-pink-100 shadow-xs">
+        <div>
+          <h2 class="text-lg sm:text-xl font-bold text-gray-800 flex items-center gap-2">
+            <i class="fa-solid fa-list-check text-pink-500"></i> Conquistas
+          </h2>
+          <p class="text-xs text-gray-500 mt-1">
+            Marque nosso progresso!
+          </p>
         </div>
 
-        <button class="pixel-btn" style="margin-top: 20px;" onclick="openScreen('main-menu')">Voltar ao Menu</button>
+        <!-- Barra de Progresso -->
+        <div class="space-y-1">
+          <div class="flex justify-between text-xs font-semibold text-pink-600">
+            <span>Progresso da nossa história</span>
+            <span id="progressText">0%</span>
+          </div>
+          <div class="w-full h-3 bg-pink-100 rounded-full overflow-hidden">
+            <div id="progressBar" class="h-full bg-pink-500 transition-all duration-500 w-0"></div>
+          </div>
+        </div>
+
+        <!-- EDITAR AQUI: ITENS DA LISTA (Adicione ou altere os textos abaixo) -->
+        <div class="space-y-3 pt-2 text-sm text-gray-700" id="checklist">
+          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
+            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
+            <span>Nosso primeiro beijo</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
+            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
+            <span>Ligação até de madrugada</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
+            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
+            <span>Aprender hábitos um do outro</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
+            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
+            <span>Rir até a barriga doer de uma piada boba</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
+            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
+            <span>Lidar com mal-entendidos</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
+            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
+            <span>Planejar viagens e o nosso futuro juntos</span>
+          </label>
+        </div>
+
+        <!-- EDITAR AQUI: POEMA DESBLOQUEÁVEL (Aparece automaticamente quando marcar 100%) -->
+        <div id="unlockedPoem" class="hidden bg-pink-50 p-6 rounded-2xl border border-pink-200 text-center space-y-3 fade-in mt-4">
+          <span class="inline-block px-3 py-1 bg-pink-200 text-pink-700 rounded-full text-xs font-bold uppercase">
+            🔓 História Desbloqueada!
+          </span>
+          <h3 class="font-handwriting text-3xl text-pink-600 font-bold">Como Nos Conhecemos...</h3>
+          <p class="text-sm text-gray-700 leading-relaxed italic">
+            "O que era acaso virou destino, e hoje agradeço por cruzarmos nossos caminhos.<br>
+            Se o destino nos uniu assim, quero que ele te mantenha sempre perto de mim.<br>
+            Pois entre tantas pessoas que eu poderia encontrar, foi você quem meu coração escolheu para amar."
+          </p>
+        </div>
+      </section>
+
+      <!-- 5. SEÇÃO DE MÚSICAS / PLAYLIST SPOTIFY -->
+      <section class="space-y-4 border-t border-pink-100 pt-8">
+        <div class="text-center">
+          <h2 class="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
+            <i class="fa-brands fa-spotify text-green-500"></i> A melodia que seus acordes carregam 
+          </h2>
+          <p class="text-xs text-gray-500 mt-1">e as notas que me lembram você</p>
+        </div>
+
+        <!-- EDITAR AQUI: LINK DA PLAYLIST OU EMBED DO SPOTIFY -->
+        <!-- Você pode substituir o iframe abaixo pelo código de "Incorporar" da sua playlist do Spotify -->
+        <div class="rounded-2xl overflow-hidden shadow-md">
+          <iframe style="border-radius:12px" src="..." width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+
+        <!-- Link Direto como alternativa -->
+        <div class="text-center pt-2">
+          <a href="https://open.spotify.com" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold text-pink-600 hover:text-pink-700 underline">
+            <span>Abrir no Spotify</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- RODAPÉ -->
+      <footer class="text-center border-t border-gray-200/60 pt-6">
+        <p class="text-xs text-gray-500 font-medium">Feito com todo amor do mundo❤️</p>
+      </footer>
+
     </div>
+  </main>
 
-    <!-- TELA: MÚSICA -->
-    <div id="music-screen" class="stardew-box screen">
-        <h2>🎵 Trilha Sonora</h2>
-        <p>"A melodia que seus acordes carregam e as notas que me lembram você."</p>
-        <a href="https://open.spotify.com" target="_blank" class="pixel-btn" style="text-decoration: none; display: inline-block;">Ouvir no Spotify 🎧</a>
-        <br>
-        <button class="pixel-btn" style="margin-top: 20px;" onclick="openScreen('main-menu')">Voltar ao Menu</button>
+  <!-- MODAL DE CONFIRMAÇÃO DA CARTA -->
+  <div id="warningModal" class="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center space-y-5 shadow-2xl border border-pink-100 fade-in">
+      <div class="w-16 h-16 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center mx-auto text-2xl">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold text-gray-900">⚠️WARNING⚠️</h3>
+        <p class="text-sm text-gray-600 mt-2 leading-relaxed">
+          Esta página pode causar sorrisos excessivos e palpitações aceleradas. Deseja continuar?
+        </p>
+      </div>
+
+      <!-- Duas opções de SIM conforme solicitado -->
+      <div class="space-y-2 pt-2">
+        <button onclick="confirmOpenLetter()" class="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white text-sm font-bold rounded-xl shadow-md transition">
+          Sim
+        </button>
+        <button onclick="confirmOpenLetter()" class="w-full py-3 bg-rose-500 hover:bg-rose-600 text-white text-sm font-bold rounded-xl shadow-md transition">
+          Sim
+        </button>
+      </div>
     </div>
+  </div>
 
-    <!-- TELA FINAL -->
-    <div id="final-screen" class="stardew-box screen">
-        <h2>🌟 Vitória Conquistada!</h2>
-        <div style="font-size: 60px; margin: 15px;">👨‍❤️‍💋‍👩</div>
-        <p style="font-size: 28px;">Giorgio & Rafaella</p>
-        <p>Obrigada por seres o meu par perfeito neste jogo e na vida.</p>
-        <button class="pixel-btn" onclick="location.reload()">Reiniciar Aventura 🔄</button>
-    </div>
+  <script>
+    /* ----------------------------------------------------
+       CONTADOR DE TEMPO DE EXISTÊNCIA (20/11/2006 às 21:11)
+       ---------------------------------------------------- */
+    // Mês é 0-indexed no JS: 0=Jan, 10=Novembro
+    const birthDate = new Date(2006, 10, 20, 21, 11, 0);
 
-    <script>
-        let clicks = 0;
-        const totalClicksNeeded = 10;
+    function updateExistenceCounter() {
+      const now = new Date();
+      let diff = now - birthDate;
 
-        function checkPassword() {
-            let pwd = document.getElementById('pass-input').value.trim();
-            if(pwd === "2011") {
-                document.getElementById('lock-screen').classList.remove('active-screen');
-                document.getElementById('loading-screen').classList.add('active-screen');
-                document.getElementById('bgm').play().catch(e => console.log("Áudio bloqueado pelo navegador"));
-            } else {
-                document.getElementById('error-msg').style.display = 'block';
-            }
-        }
+      // Cálculo aproximado de Anos e Dias
+      const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+      const remainingDaysMs = diff % (1000 * 60 * 60 * 24 * 365.25);
+      
+      const days = Math.floor(remainingDaysMs / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
 
-        // Animação de cliques na tela de Carregamento
-        document.getElementById('loading-screen').addEventListener('click', function(e) {
-            if(clicks < totalClicksNeeded) {
-                clicks++;
-                let pct = (clicks / totalClicksNeeded) * 100;
-                document.getElementById('loading-fill').style.width = pct + '%';
-                document.getElementById('loading-percent').innerText = Math.round(pct) + '%';
+      document.getElementById('years').innerText = String(years).padStart(2, '0');
+      document.getElementById('days').innerText = String(days).padStart(2, '0');
+      document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+      document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+    }
 
-                // Aproxima os avatares
-                let pxMove = clicks * 16;
-                document.getElementById('char-g').style.transform = `translateX(${pxMove}px)`;
-                document.getElementById('char-r').style.transform = `translateX(-${pxMove}px)`;
+    setInterval(updateExistenceCounter, 1000);
+    updateExistenceCounter();
 
-                // Coração flutuante
-                spawnHeart(e.clientX, e.clientY);
+    /* ----------------------------------------------------
+       CONTROLE DO MODAL DA CARTA
+       ---------------------------------------------------- */
+    function askToOpenLetter() {
+      document.getElementById('warningModal').classList.remove('hidden');
+    }
 
-                if(clicks === totalClicksNeeded) {
-                    document.getElementById('loading-text').innerText = "💖 Beijo desbloqueado!";
-                    setTimeout(() => {
-                        openScreen('main-menu');
-                    }, 1200);
-                }
-            }
-        });
+    function confirmOpenLetter() {
+      document.getElementById('warningModal').classList.add('hidden');
+      const letter = document.getElementById('secretLetter');
+      letter.classList.remove('hidden');
+      letter.scrollIntoView({ behavior: 'smooth' });
+    }
 
-        function spawnHeart(x, y) {
-            let h = document.createElement('div');
-            h.className = 'floating-heart';
-            h.innerHTML = '❤️';
-            h.style.left = (x || window.innerWidth/2) + 'px';
-            h.style.top = (y || window.innerHeight/2) + 'px';
-            document.body.appendChild(h);
-            setTimeout(() => h.remove(), 1200);
-        }
+    /* ----------------------------------------------------
+       CHECKLIST E BARRA DE PROGRESSO
+       ---------------------------------------------------- */
+    function updateProgress() {
+      const checkboxes = document.querySelectorAll('#checklist input[type="checkbox"]');
+      const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+      const total = checkboxes.length;
+      const percentage = Math.round((checkedCount / total) * 100);
 
-        function openScreen(id) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active-screen'));
-            document.getElementById(id).classList.add('active-screen');
-        }
+      const progressBar = document.getElementById('progressBar');
+      const progressText = document.getElementById('progressText');
+      
+      progressBar.style.width = percentage + '%';
+      progressText.innerText = percentage + '%';
 
-        function showStoryText() {
-            document.getElementById('story-body').style.display = 'block';
-        }
+      // Desbloqueia o poema se atingir 100%
+      const unlockedPoem = document.getElementById('unlockedPoem');
+      if (percentage === 100) {
+        unlockedPoem.classList.remove('hidden');
+      } else {
+        unlockedPoem.classList.add('hidden');
+      }
+    }
 
-        function calcXP() {
-            let boxes = document.querySelectorAll('.m-quest');
-            let currentXP = 0;
-            boxes.forEach(b => {
-                if(b.checked) currentXP += parseInt(b.value);
-            });
+    /* ----------------------------------------------------
+       CONTROLE DE ÁUDIO
+       ---------------------------------------------------- */
+    const audio = document.getElementById('bgAudio');
+    const musicIcon = document.getElementById('musicIcon');
+    const musicText = document.getElementById('musicText');
 
-            let pct = (currentXP / 1150) * 100;
-            document.getElementById('xp-text').innerText = currentXP;
-            document.getElementById('xp-fill').style.width = pct + '%';
+    // Tenta dar play automático assim que a página carregar
+    window.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play().catch(() => {});
+      }
+    }, { once: true });
 
-            if(currentXP >= 1150) {
-                document.getElementById('quest-lock').style.display = 'none';
-                document.getElementById('letter-unlocked').style.display = 'block';
-            } else {
-                document.getElementById('quest-lock').style.display = 'block';
-                document.getElementById('letter-unlocked').style.display = 'none';
-            }
-        }
-    </script>
+    function toggleAudio() {
+      if (audio.paused) {
+        audio.play();
+        musicIcon.classList.add('animate-spin');
+        musicText.innerText = 'Pausar Música';
+      } else {
+        audio.pause();
+        musicIcon.classList.remove('animate-spin');
+        musicText.innerText = 'Tocar Música';
+      }
+    }
+  </script>
 </body>
 </html>
