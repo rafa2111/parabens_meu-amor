@@ -189,7 +189,7 @@ body {
   <!-- ÁUDIO DE FUNDO -->
   <!-- EDITAR AQUI: MÚSICA DE FUNDO (Substitua a URL do arquivo mp3 caso queira sua própria música) -->
   <audio id="bgAudio" loop autoplay>
-    <source src="..." type="audio/mpeg">
+    <source src="Preciso Dizer Que Te Amo_!.mp3" type="audio/mpeg">
     Seu navegador não suporta áudio HTML5.
   </audio>
 
@@ -214,7 +214,7 @@ body {
 
         <!-- EDITAR AQUI: MENSAGEM DE BOAS-VINDAS / HOMENAGEM -->
         <p class="text-base sm:text-lg text-gray-600 max-w-lg mx-auto leading-relaxed pt-2">
-          Hoje queria te devolver um pouquinho da felicidade que você traz nos meus dias!
+          Hoje queria te devolver um pouquinho da felicidade que você traz nos meus dias
         </p>
       </section>
 
@@ -222,7 +222,7 @@ body {
       <section class="bg-white/50 rounded-3xl p-6 border border-pink-100/60 text-center shadow-xs space-y-4 backdrop-blur-xs">
         <div>
           <h2 class="text-sm uppercase font-bold text-pink-600 tracking-wider">Desde os primeiros capítulos da sua história,</h2>
-          <p class="text-xs text-gray-600 mt-0.5">fazendo do mundo um lugar mais bonito há...</p>
+          <p class="text-xs text-gray-600 mt-0.5">tudo começou há...</p>
         </div>
 
         <div class="grid grid-cols-5 gap-2 sm:gap-3 text-center" id="existenceCounter">
@@ -271,15 +271,19 @@ body {
           
           <!-- Cada parágrafo da carta fica dentro de um <p> -->
           <p class="font-delicate text-2xl text-gray-800 leading-relaxed">
-            Aqui você escreve a primeira parte da sua mensagem...
+            ...
+          </p>
+
+          <p class="font-delicate text-2xl text-gray-800 leading-relaxed">
+            ...
           </p>
           
           <p class="font-delicate text-2xl text-gray-800 leading-relaxed">
-            Aqui você continua escrevendo o que seu coração mandar...
+            ...
           </p>
 
           <p class="text-right font-handwriting text-2xl text-pink-600 font-bold mt-6">
-            Com todo o meu amor ❤️
+            Com todo amor, Rafa ❤️
           </p>
         </div>
       </section>
@@ -291,7 +295,7 @@ body {
             <i class="fa-solid fa-list-check text-pink-500"></i> Conquistas
           </h2>
           <p class="text-xs text-gray-600 mt-1">
-            Marque as coisas que já fizemos juntos, que ficam cada vez mais específicas
+            Marque as coisas que já fizemos juntos
           </p>
         </div>
 
@@ -373,19 +377,19 @@ body {
           <h2 class="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
             <i class="fa-brands fa-spotify text-green-500"></i> As notas que me lembram você
           </h2>
-          <p class="text-xs text-gray-500 mt-1">pela melodia que seus acordes carregam</p>
+          <p class="text-xs text-gray-500 mt-1">e as melodias que seus acordes carregam</p>
         </div>
 
         <!-- EDITAR AQUI: LINK DA PLAYLIST OU EMBED DO SPOTIFY -->
         <!-- Você pode substituir o iframe abaixo pelo código de "Incorporar" da sua playlist do Spotify -->
         <div class="rounded-2xl overflow-hidden shadow-md">
-          <iframe style="border-radius:12px" src="https://open.spotify.com/playlist/6MazgS07NwmREMLEcPOb4l?si=b6ORCVVfSsOG8qMNYRwPdg" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <iframe style="border-radius:12px" src="..." width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
 
         <!-- Link Direto como alternativa -->
         <div class="text-center pt-2">
-          <a href="https://open.spotify.com/playlist/6MazgS07NwmREMLEcPOb4l?si=b6ORCVVfSsOG8qMNYRwPdg" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold text-pink-600 hover:text-pink-700 underline">
-            <span>Abrir nossa playlist completa no Spotify</span>
+          <a href="..." target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold text-pink-600 hover:text-pink-700 underline">
+            <span>Abrir nossa playlist no Spotify</span>
             <i class="fa-solid fa-arrow-up-right-from-square"></i>
           </a>
         </div>
@@ -393,7 +397,7 @@ body {
 
       <!-- RODAPÉ -->
       <footer class="text-center border-t border-gray-200/60 pt-6">
-        <p class="text-xs text-gray-500 font-medium">Feito com todo amor do mundo❤️</p>
+        <p class="text-xs text-gray-500 font-medium">Feito com todo amor do mundo, por Rafa❤️</p>
       </footer>
 
     </div>
@@ -424,7 +428,32 @@ body {
     </div>
   </div>
 
+  <div id="warningModal" class="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center space-y-5 shadow-2xl border border-pink-100 fade-in">
+      <div class="w-16 h-16 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center mx-auto text-2xl">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold text-gray-900">⚠️WARNING⚠️</h3>
+        <p class="text-sm text-gray-600 mt-2 leading-relaxed">
+          Tem certeza?
+        </p>
+      </div>
+
+      <!-- Duas opções de SIM conforme solicitado -->
+      <div class="space-y-2 pt-2">
+        <button onclick="confirmOpenLetter()" class="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white text-sm font-bold rounded-xl shadow-md transition">
+          Sim
+        </button>
+        <button onclick="confirmOpenLetter()" class="w-full py-3 bg-rose-500 hover:bg-rose-600 text-white text-sm font-bold rounded-xl shadow-md transition">
+          Sim
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script>
+    
     /* ----------------------------------------------------
        CONTADOR DE TEMPO DE EXISTÊNCIA (20/11/2006 às 21:11)
        ---------------------------------------------------- */
