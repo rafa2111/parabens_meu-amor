@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feliz Aniversário, Amor!</title>
+  <title>Feliz Aniversário, meu amor!</title>
   
   <!-- Tailwind CSS para estilização moderna e responsiva -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -14,7 +14,7 @@
   
   <style>
     /* ----------------------------------------------------
-       ANIMAÇÃO DO CORAÇÃO DE FUNDO (Tamanho Expandido)
+       ANIMAÇÃO DO CORAÇÃO DE FUNDO (Ajustado para maior visibilidade)
        ---------------------------------------------------- */
     :root {
       --valentines: #eb3f84;
@@ -44,14 +44,14 @@
       transform: translate(-50%, -50%);
       z-index: 0;
       pointer-events: none;
-      opacity: 0.65;
+      opacity: 0.95; /* Aumentado para o coração ficar bem visível */
     }
 
-    /* Coração maior conforme pedido */
+    /* Coração maior e bem visível no centro */
     .heart {
       position: relative;
-      width: 260px;
-      height: 260px;
+      width: 280px;
+      height: 280px;
       background: var(--valentines);
       transform: rotate(45deg);
       animation: heart 5s ease infinite;
@@ -60,47 +60,47 @@
     .heart:before,
     .heart:after {
       content: "";
-      width: 260px;
-      height: 260px;
+      width: 280px;
+      height: 280px;
       position: absolute;
       background: var(--valentines);
-      border-radius: 260px;
+      border-radius: 280px;
       transition: 1s ease all;
     }
 
     .heart:before {
-      top: -130px;
+      top: -140px;
       left: 0;
       animation: left 5s ease infinite;
     }
 
     .heart:after {
-      left: 130px;
+      left: 140px;
       top: 0;
       animation: right 5s ease infinite;
     }
 
     @keyframes heart {
-      0% { transform: rotate(0deg); border-radius: 260px; background: #fff; }
-      30% { transform: rotate(45deg); border-radius: 16px; }
+      0% { transform: rotate(0deg); border-radius: 280px; background: #fff; }
+      30% { transform: rotate(45deg); border-radius: 20px; }
       50% { background: var(--valentines); }
-      70% { transform: rotate(45deg); border-radius: 16px; }
-      100% { transform: rotate(90deg); border-radius: 260px; background: #fff; }
+      70% { transform: rotate(45deg); border-radius: 20px; }
+      100% { transform: rotate(90deg); border-radius: 280px; background: #fff; }
     }
 
     @keyframes left {
       0% { top: 0; background: #fff; }
-      30% { top: -130px; }
+      30% { top: -140px; }
       50% { background: var(--valentines); }
-      70% { top: -130px; }
+      70% { top: -140px; }
       100% { top: 0; background: #fff; }
     }
 
     @keyframes right {
       0% { left: 0; background: #fff; }
-      30% { left: -130px; }
+      30% { left: -140px; }
       50% { background: var(--valentines); }
-      70% { left: -130px; }
+      70% { left: -140px; }
       100% { left: 0; background: #fff; }
     }
 
@@ -110,13 +110,13 @@
       100% { background: var(--valentines); }
     }
 
-    /* ESTILOS DE VIDRO E FONTE */
+    /* ESTILOS DE VIDRO MAIS TRANSLÚCIDOS PARA REVELAR O CORAÇÃO */
     .glass-card {
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      box-shadow: 0 25px 50px -12px rgba(235, 63, 132, 0.25);
+      background: rgba(255, 255, 255, 0.65); /* Fundo suave translúcido */
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 20px 40px -10px rgba(235, 63, 132, 0.3);
     }
 
     .font-handwriting {
@@ -177,47 +177,47 @@
         
         <!-- EDITAR AQUI: DATA DELICADA NO TOPO -->
         <span class="inline-block font-delicate text-2xl sm:text-3xl text-pink-600 tracking-wide font-bold">
-           20 de Novembro 
+          20 de Novembro
         </span>
 
         <!-- EDITAR AQUI: TÍTULO PRINCIPAL -->
         <h1 class="text-4xl sm:text-6xl font-bold text-gray-900 font-handwriting leading-tight">
-          Parabéns!
+          Feliz vida, amor! 
         </h1>
 
         <!-- EDITAR AQUI: MENSAGEM DE BOAS-VINDAS / HOMENAGEM -->
         <p class="text-base sm:text-lg text-gray-600 max-w-lg mx-auto leading-relaxed pt-2">
-          Hoje, no seu aniversário, queria te devolver um pouquinho da felicidade que você trouxe para a minha vida.
+          Hoje, no seu aniversário, queria te devolver um pouquinho da felicidade que você traz nos meus dias!
         </p>
       </section>
 
       <!-- 2. CONTADOR DE EXISTÊNCIA (Nasceu em 20/11/2006 às 21:11) -->
-      <section class="bg-white/70 rounded-3xl p-6 border border-pink-100 text-center shadow-sm space-y-4">
+      <section class="bg-white/50 rounded-3xl p-6 border border-pink-100/60 text-center shadow-xs space-y-4 backdrop-blur-xs">
         <div>
-          <h2 class="text-sm uppercase font-bold text-pink-600 tracking-wider">Desde o instante em que o mundo ganhou você</h2>
-          <p class="text-xs text-gray-500 mt-0.5">Fazendo do mundo um lugar mais bonito há...</p>
+          <h2 class="text-sm uppercase font-bold text-pink-600 tracking-wider">Desde os primeiros capítulos da sua história,</h2>
+          <p class="text-xs text-gray-600 mt-0.5">fazendo do mundo um lugar mais bonito há...</p>
         </div>
 
         <div class="grid grid-cols-5 gap-2 sm:gap-3 text-center" id="existenceCounter">
-          <div class="bg-pink-50/80 p-2 sm:p-4 rounded-2xl border border-pink-100">
+          <div class="bg-white/70 p-2 sm:p-4 rounded-2xl border border-pink-200/60">
             <span id="years" class="block text-xl sm:text-3xl font-bold text-pink-600">00</span>
-            <span class="text-[10px] sm:text-xs text-gray-500 font-medium">Anos</span>
+            <span class="text-[10px] sm:text-xs text-gray-600 font-medium">Anos</span>
           </div>
-          <div class="bg-pink-50/80 p-2 sm:p-4 rounded-2xl border border-pink-100">
+          <div class="bg-white/70 p-2 sm:p-4 rounded-2xl border border-pink-200/60">
             <span id="days" class="block text-xl sm:text-3xl font-bold text-pink-600">00</span>
-            <span class="text-[10px] sm:text-xs text-gray-500 font-medium">Dias</span>
+            <span class="text-[10px] sm:text-xs text-gray-600 font-medium">Dias</span>
           </div>
-          <div class="bg-pink-50/80 p-2 sm:p-4 rounded-2xl border border-pink-100">
+          <div class="bg-white/70 p-2 sm:p-4 rounded-2xl border border-pink-200/60">
             <span id="hours" class="block text-xl sm:text-3xl font-bold text-pink-600">00</span>
-            <span class="text-[10px] sm:text-xs text-gray-500 font-medium">Horas</span>
+            <span class="text-[10px] sm:text-xs text-gray-600 font-medium">Horas</span>
           </div>
-          <div class="bg-pink-50/80 p-2 sm:p-4 rounded-2xl border border-pink-100">
+          <div class="bg-white/70 p-2 sm:p-4 rounded-2xl border border-pink-200/60">
             <span id="minutes" class="block text-xl sm:text-3xl font-bold text-pink-600">00</span>
-            <span class="text-[10px] sm:text-xs text-gray-500 font-medium">Minutos</span>
+            <span class="text-[10px] sm:text-xs text-gray-600 font-medium">Minutos</span>
           </div>
-          <div class="bg-pink-50/80 p-2 sm:p-4 rounded-2xl border border-pink-100">
+          <div class="bg-white/70 p-2 sm:p-4 rounded-2xl border border-pink-200/60">
             <span id="seconds" class="block text-xl sm:text-3xl font-bold text-pink-600">00</span>
-            <span class="text-[10px] sm:text-xs text-gray-500 font-medium">Segundos</span>
+            <span class="text-[10px] sm:text-xs text-gray-600 font-medium">Segundos</span>
           </div>
         </div>
       </section>
@@ -226,9 +226,9 @@
       <section class="space-y-4">
         <div class="text-center">
           <h2 class="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
-            <i class="fa-solid fa-envelope text-pink-500"></i> Algo para você
+            <i class="fa-solid fa-envelope text-pink-500"></i> Tem algo para você aqui!
           </h2>
-          <p class="text-xs text-gray-500">Clique para abrir a carta</p>
+          <p class="text-xs text-gray-500">Clique para descobrir</p>
         </div>
 
         <!-- Botão de Abertura -->
@@ -246,7 +246,7 @@
             ...
           </p>
           <p class="text-gray-700 leading-relaxed text-sm sm:text-base">
-            ...
+             ...
           </p>
           <p class="text-gray-700 leading-relaxed text-sm sm:text-base">
             ...
@@ -259,13 +259,13 @@
       </section>
 
       <!-- 4. CHECKLIST DO CASAL + BARRA DE PROGRESSO -->
-      <section class="space-y-5 bg-white/60 p-6 rounded-3xl border border-pink-100 shadow-xs">
+      <section class="space-y-5 bg-white/50 p-6 rounded-3xl border border-pink-100/60 shadow-xs backdrop-blur-xs">
         <div>
           <h2 class="text-lg sm:text-xl font-bold text-gray-800 flex items-center gap-2">
             <i class="fa-solid fa-list-check text-pink-500"></i> Conquistas
           </h2>
-          <p class="text-xs text-gray-500 mt-1">
-            Marque nosso progresso!
+          <p class="text-xs text-gray-600 mt-1">
+            Marque as coisas que já fizemos juntos, que ficam cada vez mais específicas
           </p>
         </div>
 
@@ -289,17 +289,7 @@
 
           <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
             <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
-            <span>Ligação até de madrugada</span>
-          </label>
-
-          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
-            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
-            <span>Aprender hábitos um do outro</span>
-          </label>
-
-          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
-            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
-            <span>Rir até a barriga doer de uma piada boba</span>
+            <span>Ficar em ligação até de madrugada</span>
           </label>
 
           <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
@@ -309,7 +299,32 @@
 
           <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
             <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
-            <span>Planejar viagens e o nosso futuro juntos</span>
+            <span>Aprender hábitos um do outro</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
+            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
+            <span>Sonecas e cochilos</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
+            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
+            <span>Rir até chorar e a barriga doer da piada mais besta possível</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
+            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
+            <span>Planejar viagens e futuro juntos</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
+            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
+            <span>Abrir investimentos para ficar milionário em 2045</span>
+          </label>
+
+           <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
+            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
+            <span>Ter uma namorada que ama tanto que aprende html em um mês para impressionar seu amado</span>
           </label>
         </div>
 
@@ -318,7 +333,7 @@
           <span class="inline-block px-3 py-1 bg-pink-200 text-pink-700 rounded-full text-xs font-bold uppercase">
             🔓 História Desbloqueada!
           </span>
-          <h3 class="font-handwriting text-3xl text-pink-600 font-bold">Como Nos Conhecemos...</h3>
+          <h3 class="font-handwriting text-3xl text-pink-600 font-bold">Uma breve declaração</h3>
           <p class="text-sm text-gray-700 leading-relaxed italic">
             "O que era acaso virou destino, e hoje agradeço por cruzarmos nossos caminhos.<br>
             Se o destino nos uniu assim, quero que ele te mantenha sempre perto de mim.<br>
@@ -331,9 +346,9 @@
       <section class="space-y-4 border-t border-pink-100 pt-8">
         <div class="text-center">
           <h2 class="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
-            <i class="fa-brands fa-spotify text-green-500"></i> A melodia que seus acordes carregam 
+            <i class="fa-brands fa-spotify text-green-500"></i> As notas que me lembram você
           </h2>
-          <p class="text-xs text-gray-500 mt-1">e as notas que me lembram você</p>
+          <p class="text-xs text-gray-500 mt-1">pela melodia que seus acordes carregam</p>
         </div>
 
         <!-- EDITAR AQUI: LINK DA PLAYLIST OU EMBED DO SPOTIFY -->
@@ -345,7 +360,7 @@
         <!-- Link Direto como alternativa -->
         <div class="text-center pt-2">
           <a href="https://open.spotify.com" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold text-pink-600 hover:text-pink-700 underline">
-            <span>Abrir no Spotify</span>
+            <span>Abrir nossa playlist completa no Spotify</span>
             <i class="fa-solid fa-arrow-up-right-from-square"></i>
           </a>
         </div>
@@ -375,10 +390,10 @@
       <!-- Duas opções de SIM conforme solicitado -->
       <div class="space-y-2 pt-2">
         <button onclick="confirmOpenLetter()" class="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white text-sm font-bold rounded-xl shadow-md transition">
-          Sim
+          Sim!
         </button>
         <button onclick="confirmOpenLetter()" class="w-full py-3 bg-rose-500 hover:bg-rose-600 text-white text-sm font-bold rounded-xl shadow-md transition">
-          Sim
+          Sim!
         </button>
       </div>
     </div>
