@@ -7,9 +7,9 @@
   
   <!-- Tailwind CSS para estilização moderna e responsiva -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome para ícones fofos -->
+  <!-- FontAwesome para ícones -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Fontes Google delicadas -->
+  <!-- Fontes Google -->
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
@@ -41,7 +41,7 @@ body {
   cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23eb3f84"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'), auto;
 }
     /* ----------------------------------------------------
-       ANIMAÇÃO DO CORAÇÃO DE FUNDO (Ajustado para maior visibilidade)
+       ANIMAÇÃO DO CORAÇÃO DE FUNDO 
        ---------------------------------------------------- */
     :root {
       --valentines: #eb3f84;
@@ -71,10 +71,10 @@ body {
       transform: translate(-50%, -50%);
       z-index: 0;
       pointer-events: none;
-      opacity: 0.95; /* Aumentado para o coração ficar bem visível */
+      opacity: 0.95; /* Aumentado */
     }
 
-    /* Coração maior e bem visível no centro */
+    /* Coração maior e visível no centro */
     .heart {
       position: relative;
       width: 280px;
@@ -137,7 +137,7 @@ body {
       100% { background: var(--valentines); }
     }
 
-    /* ESTILOS DE VIDRO MAIS TRANSLÚCIDOS PARA REVELAR O CORAÇÃO */
+    /* ESTILOS DE VIDRO TRANSLÚCIDOS */
     .glass-card {
       background: rgba(255, 255, 255, 0.65); /* Fundo suave translúcido */
       backdrop-filter: blur(12px);
@@ -189,7 +189,7 @@ body {
   <!-- ÁUDIO DE FUNDO -->
   <!-- EDITAR AQUI: MÚSICA DE FUNDO (Substitua a URL do arquivo mp3 caso queira sua própria música) -->
   <audio id="bgAudio" loop autoplay>
-    <source src="https://open.spotify.com/intl-pt/track/0zLs0xjw4MYcMiXHsOvSgk?si=57289d4759f64aed" type="audio/mpeg">
+    <source src="..." type="audio/mpeg">
     Seu navegador não suporta áudio HTML5.
   </audio>
 
@@ -526,7 +526,7 @@ Eu te amo muito, Giorgio. Feliz aniversário, meu amor ❤️
 document.addEventListener('click', function(e) {
   const heart = document.createElement('div');
   heart.className = 'click-heart';
-  heart.innerHTML = '❤️';
+  heart.innerHTML = '💗';
   heart.style.left = e.clientX + 'px';
   heart.style.top = e.clientY + 'px';
   heart.style.fontSize = (Math.random() * 12 + 16) + 'px'; // Tamanhos variados
