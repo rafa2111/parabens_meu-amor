@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feliz Aniversário, Amor!</title>
+  <title>Feliz Aniversário, amor!</title>
   
   <!-- Tailwind CSS para estilização moderna e responsiva -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -11,10 +11,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Fontes Google delicadas -->
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+  <!-- Canvas Confetti para efeitos visuais -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
   <style>
     /* ----------------------------------------------------
-       ANIMAÇÃO DO CORAÇÃO DE FUNDO (Tamanho Expandido)
+       ANIMAÇÃO DO CORAÇÃO DE FUNDO (Transparência Ideal)
        ---------------------------------------------------- */
     :root {
       --valentines: #eb3f84;
@@ -31,6 +33,7 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       min-height: 100vh;
       scroll-behavior: smooth;
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23eb3f84"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'), auto;
     }
 
     html {
@@ -44,14 +47,14 @@
       transform: translate(-50%, -50%);
       z-index: 0;
       pointer-events: none;
-      opacity: 0.65;
+      opacity: 0.95; /* Alta visibilidade do coração */
     }
 
-    /* Coração maior conforme pedido */
+    /* Coração de Fundo */
     .heart {
       position: relative;
-      width: 260px;
-      height: 260px;
+      width: 280px;
+      height: 280px;
       background: var(--valentines);
       transform: rotate(45deg);
       animation: heart 5s ease infinite;
@@ -60,423 +63,19 @@
     .heart:before,
     .heart:after {
       content: "";
-      width: 260px;
-      height: 260px;
+      width: 280px;
+      height: 280px;
       position: absolute;
       background: var(--valentines);
-      border-radius: 260px;
+      border-radius: 280px;
       transition: 1s ease all;
     }
 
     .heart:before {
-      top: -130px;
+      top: -140px;
       left: 0;
       animation: left 5s ease infinite;
     }
 
     .heart:after {
-      left: 130px;
-      top: 0;
-      animation: right 5s ease infinite;
-    }
-
-    @keyframes heart {
-      0% { transform: rotate(0deg); border-radius: 260px; background: #fff; }
-      30% { transform: rotate(45deg); border-radius: 16px; }
-      50% { background: var(--valentines); }
-      70% { transform: rotate(45deg); border-radius: 16px; }
-      100% { transform: rotate(90deg); border-radius: 260px; background: #fff; }
-    }
-
-    @keyframes left {
-      0% { top: 0; background: #fff; }
-      30% { top: -130px; }
-      50% { background: var(--valentines); }
-      70% { top: -130px; }
-      100% { top: 0; background: #fff; }
-    }
-
-    @keyframes right {
-      0% { left: 0; background: #fff; }
-      30% { left: -130px; }
-      50% { background: var(--valentines); }
-      70% { left: -130px; }
-      100% { left: 0; background: #fff; }
-    }
-
-    @keyframes html-bg {
-      0% { background: var(--valentines); }
-      50% { background: #ffffff; }
-      100% { background: var(--valentines); }
-    }
-
-    /* ESTILOS DE VIDRO E FONTE */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      box-shadow: 0 25px 50px -12px rgba(235, 63, 132, 0.25);
-    }
-
-    .font-handwriting {
-      font-family: 'Dancing Script', cursive;
-    }
-
-    .font-delicate {
-      font-family: 'Caveat', cursive;
-    }
-
-    /* Checkbox personalizado */
-    .custom-checkbox:checked {
-      background-color: #eb3f84;
-      border-color: #eb3f84;
-    }
-
-    /* Animações suaves de fade */
-    .fade-in {
-      animation: fadeIn 0.5s ease-in-out forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-</head>
-<body class="relative min-h-screen flex flex-col items-center justify-start p-3 sm:p-8">
-
-  <!-- Animação do Coração no Fundo -->
-  <div class="heart-bg-wrapper">
-    <div class="heart"></div>
-  </div>
-
-  <!-- Player de Música Flutuante no Canto Inferior Direito -->
-  <div class="fixed bottom-4 right-4 z-50">
-    <button id="musicToggleBtn" onclick="toggleAudio()" class="flex items-center gap-2 bg-pink-600 hover:bg-pink-700 text-white text-xs sm:text-sm font-medium px-4 py-3 rounded-full shadow-xl transition transform hover:scale-105 active:scale-95">
-      <i id="musicIcon" class="fa-solid fa-music animate-spin"></i>
-      <span id="musicText">Pausar Música</span>
-    </button>
-  </div>
-
-  <!-- ÁUDIO DE FUNDO -->
-  <!-- EDITAR AQUI: MÚSICA DE FUNDO (Substitua a URL do arquivo mp3 caso queira sua própria música) -->
-  <audio id="bgAudio" loop autoplay>
-    <source src="..." type="audio/mpeg">
-    Seu navegador não suporta áudio HTML5.
-  </audio>
-
-  <!-- Conteúdo Principal -->
-  <main class="relative z-10 w-full max-w-3xl my-4 sm:my-8 space-y-8">
-
-    <!-- CARTÃO PRINCIPAL -->
-    <div class="glass-card rounded-3xl p-6 sm:p-12 text-slate-800 space-y-10">
-
-      <!-- 1. SEÇÃO DE ANIVERSÁRIO (CABEÇALHO) -->
-      <section class="text-center space-y-3 border-b border-pink-100 pb-8">
-        
-        <!-- EDITAR AQUI: DATA DELICADA NO TOPO -->
-        <span class="inline-block font-delicate text-2xl sm:text-3xl text-pink-600 tracking-wide font-bold">
-           20 de Novembro 
-        </span>
-
-        <!-- EDITAR AQUI: TÍTULO PRINCIPAL -->
-        <h1 class="text-4xl sm:text-6xl font-bold text-gray-900 font-handwriting leading-tight">
-          Parabéns!
-        </h1>
-
-        <!-- EDITAR AQUI: MENSAGEM DE BOAS-VINDAS / HOMENAGEM -->
-        <p class="text-base sm:text-lg text-gray-600 max-w-lg mx-auto leading-relaxed pt-2">
-          Hoje, no seu aniversário, queria te devolver um pouquinho da felicidade que você trouxe para a minha vida.
-        </p>
-      </section>
-
-      <!-- 2. CONTADOR DE EXISTÊNCIA (Nasceu em 20/11/2006 às 21:11) -->
-      <section class="bg-white/70 rounded-3xl p-6 border border-pink-100 text-center shadow-sm space-y-4">
-        <div>
-          <h2 class="text-sm uppercase font-bold text-pink-600 tracking-wider">Desde o instante em que o mundo ganhou você</h2>
-          <p class="text-xs text-gray-500 mt-0.5">Fazendo do mundo um lugar mais bonito há...</p>
-        </div>
-
-        <div class="grid grid-cols-5 gap-2 sm:gap-3 text-center" id="existenceCounter">
-          <div class="bg-pink-50/80 p-2 sm:p-4 rounded-2xl border border-pink-100">
-            <span id="years" class="block text-xl sm:text-3xl font-bold text-pink-600">00</span>
-            <span class="text-[10px] sm:text-xs text-gray-500 font-medium">Anos</span>
-          </div>
-          <div class="bg-pink-50/80 p-2 sm:p-4 rounded-2xl border border-pink-100">
-            <span id="days" class="block text-xl sm:text-3xl font-bold text-pink-600">00</span>
-            <span class="text-[10px] sm:text-xs text-gray-500 font-medium">Dias</span>
-          </div>
-          <div class="bg-pink-50/80 p-2 sm:p-4 rounded-2xl border border-pink-100">
-            <span id="hours" class="block text-xl sm:text-3xl font-bold text-pink-600">00</span>
-            <span class="text-[10px] sm:text-xs text-gray-500 font-medium">Horas</span>
-          </div>
-          <div class="bg-pink-50/80 p-2 sm:p-4 rounded-2xl border border-pink-100">
-            <span id="minutes" class="block text-xl sm:text-3xl font-bold text-pink-600">00</span>
-            <span class="text-[10px] sm:text-xs text-gray-500 font-medium">Minutos</span>
-          </div>
-          <div class="bg-pink-50/80 p-2 sm:p-4 rounded-2xl border border-pink-100">
-            <span id="seconds" class="block text-xl sm:text-3xl font-bold text-pink-600">00</span>
-            <span class="text-[10px] sm:text-xs text-gray-500 font-medium">Segundos</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- 3. SEÇÃO DA CARTA DE AMOR INTERATIVA -->
-      <section class="space-y-4">
-        <div class="text-center">
-          <h2 class="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
-            <i class="fa-solid fa-envelope text-pink-500"></i> Algo para você
-          </h2>
-          <p class="text-xs text-gray-500">Clique para abrir a carta</p>
-        </div>
-
-        <!-- Botão de Abertura -->
-        <button onclick="askToOpenLetter()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-semibold flex items-center justify-center gap-3 shadow-lg shadow-pink-500/25 transition transform active:scale-98">
-          <i class="fa-solid fa-heart"></i>
-          <span>Abrir</span>
-        </button>
-
-        <!-- Carta Escondida (Aparece após o alerta de confirmação) -->
-        <div id="secretLetter" class="hidden bg-white/95 p-6 sm:p-8 rounded-3xl border border-pink-200 shadow-md space-y-4 fade-in">
-          <!-- EDITAR AQUI: SUA CARTA DE AMOR (Escreva o que desejar entre as tags <p>) -->
-          <p class="font-handwriting text-3xl text-pink-600 font-bold">Meu amor eterno,</p>
-          
-          <p class="text-gray-700 leading-relaxed text-sm sm:text-base">
-            ...
-          </p>
-          <p class="text-gray-700 leading-relaxed text-sm sm:text-base">
-            ...
-          </p>
-          <p class="text-gray-700 leading-relaxed text-sm sm:text-base">
-            ...
-          </p>
-
-          <p class="text-right font-handwriting text-2xl text-pink-600 font-bold mt-6">
-            Com todo o meu amor e carinho ❤️
-          </p>
-        </div>
-      </section>
-
-      <!-- 4. CHECKLIST DO CASAL + BARRA DE PROGRESSO -->
-      <section class="space-y-5 bg-white/60 p-6 rounded-3xl border border-pink-100 shadow-xs">
-        <div>
-          <h2 class="text-lg sm:text-xl font-bold text-gray-800 flex items-center gap-2">
-            <i class="fa-solid fa-list-check text-pink-500"></i> Conquistas
-          </h2>
-          <p class="text-xs text-gray-500 mt-1">
-            Marque nosso progresso!
-          </p>
-        </div>
-
-        <!-- Barra de Progresso -->
-        <div class="space-y-1">
-          <div class="flex justify-between text-xs font-semibold text-pink-600">
-            <span>Progresso da nossa história</span>
-            <span id="progressText">0%</span>
-          </div>
-          <div class="w-full h-3 bg-pink-100 rounded-full overflow-hidden">
-            <div id="progressBar" class="h-full bg-pink-500 transition-all duration-500 w-0"></div>
-          </div>
-        </div>
-
-        <!-- EDITAR AQUI: ITENS DA LISTA (Adicione ou altere os textos abaixo) -->
-        <div class="space-y-3 pt-2 text-sm text-gray-700" id="checklist">
-          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
-            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
-            <span>Nosso primeiro beijo</span>
-          </label>
-
-          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
-            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
-            <span>Ligação até de madrugada</span>
-          </label>
-
-          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
-            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
-            <span>Aprender hábitos um do outro</span>
-          </label>
-
-          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
-            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
-            <span>Rir até a barriga doer de uma piada boba</span>
-          </label>
-
-          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
-            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
-            <span>Lidar com mal-entendidos</span>
-          </label>
-
-          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
-            <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
-            <span>Planejar viagens e o nosso futuro juntos</span>
-          </label>
-        </div>
-
-        <!-- EDITAR AQUI: POEMA DESBLOQUEÁVEL (Aparece automaticamente quando marcar 100%) -->
-        <div id="unlockedPoem" class="hidden bg-pink-50 p-6 rounded-2xl border border-pink-200 text-center space-y-3 fade-in mt-4">
-          <span class="inline-block px-3 py-1 bg-pink-200 text-pink-700 rounded-full text-xs font-bold uppercase">
-            🔓 História Desbloqueada!
-          </span>
-          <h3 class="font-handwriting text-3xl text-pink-600 font-bold">Como Nos Conhecemos...</h3>
-          <p class="text-sm text-gray-700 leading-relaxed italic">
-            "O que era acaso virou destino, e hoje agradeço por cruzarmos nossos caminhos.<br>
-            Se o destino nos uniu assim, quero que ele te mantenha sempre perto de mim.<br>
-            Pois entre tantas pessoas que eu poderia encontrar, foi você quem meu coração escolheu para amar."
-          </p>
-        </div>
-      </section>
-
-      <!-- 5. SEÇÃO DE MÚSICAS / PLAYLIST SPOTIFY -->
-      <section class="space-y-4 border-t border-pink-100 pt-8">
-        <div class="text-center">
-          <h2 class="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
-            <i class="fa-brands fa-spotify text-green-500"></i> A melodia que seus acordes carregam 
-          </h2>
-          <p class="text-xs text-gray-500 mt-1">e as notas que me lembram você</p>
-        </div>
-
-        <!-- EDITAR AQUI: LINK DA PLAYLIST OU EMBED DO SPOTIFY -->
-        <!-- Você pode substituir o iframe abaixo pelo código de "Incorporar" da sua playlist do Spotify -->
-        <div class="rounded-2xl overflow-hidden shadow-md">
-          <iframe style="border-radius:12px" src="..." width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-
-        <!-- Link Direto como alternativa -->
-        <div class="text-center pt-2">
-          <a href="https://open.spotify.com" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold text-pink-600 hover:text-pink-700 underline">
-            <span>Abrir no Spotify</span>
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          </a>
-        </div>
-      </section>
-
-      <!-- RODAPÉ -->
-      <footer class="text-center border-t border-gray-200/60 pt-6">
-        <p class="text-xs text-gray-500 font-medium">Feito com todo amor do mundo❤️</p>
-      </footer>
-
-    </div>
-  </main>
-
-  <!-- MODAL DE CONFIRMAÇÃO DA CARTA -->
-  <div id="warningModal" class="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden">
-    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center space-y-5 shadow-2xl border border-pink-100 fade-in">
-      <div class="w-16 h-16 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center mx-auto text-2xl">
-        <i class="fa-solid fa-triangle-exclamation"></i>
-      </div>
-      <div>
-        <h3 class="text-lg font-bold text-gray-900">⚠️WARNING⚠️</h3>
-        <p class="text-sm text-gray-600 mt-2 leading-relaxed">
-          Esta página pode causar sorrisos excessivos e palpitações aceleradas. Deseja continuar?
-        </p>
-      </div>
-
-      <!-- Duas opções de SIM conforme solicitado -->
-      <div class="space-y-2 pt-2">
-        <button onclick="confirmOpenLetter()" class="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white text-sm font-bold rounded-xl shadow-md transition">
-          Sim
-        </button>
-        <button onclick="confirmOpenLetter()" class="w-full py-3 bg-rose-500 hover:bg-rose-600 text-white text-sm font-bold rounded-xl shadow-md transition">
-          Sim
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    /* ----------------------------------------------------
-       CONTADOR DE TEMPO DE EXISTÊNCIA (20/11/2006 às 21:11)
-       ---------------------------------------------------- */
-    // Mês é 0-indexed no JS: 0=Jan, 10=Novembro
-    const birthDate = new Date(2006, 10, 20, 21, 11, 0);
-
-    function updateExistenceCounter() {
-      const now = new Date();
-      let diff = now - birthDate;
-
-      // Cálculo aproximado de Anos e Dias
-      const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
-      const remainingDaysMs = diff % (1000 * 60 * 60 * 24 * 365.25);
-      
-      const days = Math.floor(remainingDaysMs / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      document.getElementById('years').innerText = String(years).padStart(2, '0');
-      document.getElementById('days').innerText = String(days).padStart(2, '0');
-      document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-      document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-      document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
-    }
-
-    setInterval(updateExistenceCounter, 1000);
-    updateExistenceCounter();
-
-    /* ----------------------------------------------------
-       CONTROLE DO MODAL DA CARTA
-       ---------------------------------------------------- */
-    function askToOpenLetter() {
-      document.getElementById('warningModal').classList.remove('hidden');
-    }
-
-    function confirmOpenLetter() {
-      document.getElementById('warningModal').classList.add('hidden');
-      const letter = document.getElementById('secretLetter');
-      letter.classList.remove('hidden');
-      letter.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    /* ----------------------------------------------------
-       CHECKLIST E BARRA DE PROGRESSO
-       ---------------------------------------------------- */
-    function updateProgress() {
-      const checkboxes = document.querySelectorAll('#checklist input[type="checkbox"]');
-      const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
-      const total = checkboxes.length;
-      const percentage = Math.round((checkedCount / total) * 100);
-
-      const progressBar = document.getElementById('progressBar');
-      const progressText = document.getElementById('progressText');
-      
-      progressBar.style.width = percentage + '%';
-      progressText.innerText = percentage + '%';
-
-      // Desbloqueia o poema se atingir 100%
-      const unlockedPoem = document.getElementById('unlockedPoem');
-      if (percentage === 100) {
-        unlockedPoem.classList.remove('hidden');
-      } else {
-        unlockedPoem.classList.add('hidden');
-      }
-    }
-
-    /* ----------------------------------------------------
-       CONTROLE DE ÁUDIO
-       ---------------------------------------------------- */
-    const audio = document.getElementById('bgAudio');
-    const musicIcon = document.getElementById('musicIcon');
-    const musicText = document.getElementById('musicText');
-
-    // Tenta dar play automático assim que a página carregar
-    window.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play().catch(() => {});
-      }
-    }, { once: true });
-
-    function toggleAudio() {
-      if (audio.paused) {
-        audio.play();
-        musicIcon.classList.add('animate-spin');
-        musicText.innerText = 'Pausar Música';
-      } else {
-        audio.pause();
-        musicIcon.classList.remove('animate-spin');
-        musicText.innerText = 'Tocar Música';
-      }
-    }
-  </script>
-</body>
-</html>
+      left: 140
