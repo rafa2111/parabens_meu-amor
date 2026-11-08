@@ -503,6 +503,70 @@ body {
   </div>
 
   <script>
+
+  // LÓGICA DO QUEBRA-CABEÇA SLIDING
+    // EDITAR AQUI: COLOQUE O NOME EXATO DA SUA FOTO ENTRE AS ASPAS
+    const puzzleImgUrl = 'img.jpg'; 
+    let puzzleState = [0, 1, 2, 3, 4, 5, 6, 7, 8]; 
+    const solutionState = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
+    function initPuzzle() {
+      puzzleState = [0, 1, 2, 3, 4, 5, 6, 7, 8].sort(() => Math.random() - 0.5);
+      renderPuzzle();
+    }
+
+    function renderPuzzle() {
+      const board = document.getElementById('puzzleBoard');
+      board.innerHTML = '';
+
+      puzzleState.forEach((pieceVal, index) => {
+        const piece = document.createElement('div');
+        if (pieceVal === 8) {
+          piece.className = 'puzzle-piece puzzle-empty';
+        } else {
+          piece.className = 'puzzle-piece';
+          piece.style.backgroundImage = `url('${puzzleImgUrl}')`;
+          const row = Math.floor(pieceVal / 3);
+          const col = pieceVal % 3;
+          piece.style.backgroundPosition = `-${col * 90}px -${row * 90}px`;
+          piece.onclick = () => movePiece(index);
+        }
+        board.appendChild(piece);
+      });
+
+      checkPuzzleWin();
+    }
+
+    function movePiece(index) {
+      const emptyIndex = puzzleState.indexOf(8);
+      const isSameRow = Math.floor(index / 3) === Math.floor(emptyIndex / 3);
+      const isSameCol = index % 3 === emptyIndex % 3;
+
+      if ((isSameRow && Math.abs(index - emptyIndex) === 1) || (isSameCol && Math.abs(index - emptyIndex) === 3)) {
+        [puzzleState[index], puzzleState[emptyIndex]] = [puzzleState[emptyIndex], puzzleState[index]];
+        renderPuzzle();
+      }
+    }
+
+    function checkPuzzleWin() {
+      const isWin = puzzleState.every((val, idx) => val === solutionState[idx]);
+      if (isWin) {
+        const vouchers = document.getElementById('unlockedVouchers');
+        if (vouchers.classList.contains('hidden')) {
+          vouchers.classList.remove('hidden');
+          confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
+        }
+      }
+    }
+
+    function autoSolvePuzzle() {
+      puzzleState = [...solutionState];
+      renderPuzzle();
+    }
+
+    window.onload = () => {
+      initPuzzle();
+    };
     
     /* ----------------------------------------------------
        CONTADOR DE TEMPO DE EXISTÊNCIA (20/11/2006 às 21:11)
