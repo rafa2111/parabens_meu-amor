@@ -497,7 +497,7 @@
   <!-- ÁUDIO DE FUNDO -->
   <!-- EDITAR AQUI: renomeie seu arquivo para musica.mp3 (sem espaços nem "!") e coloque na mesma pasta deste index.html -->
   <audio id="bgAudio" loop>
-    <source src="musica.mp3" type="audio/mpeg">
+    <source src="Preciso Dizer Que Te Amo_!.mp3" type="audio/mpeg">
     Seu navegador não suporta áudio HTML5.
   </audio>
 
@@ -773,7 +773,7 @@
         </div>
 
         <div class="space-y-3" id="coupons">
-          <div class="coupon" data-id="jantar">
+          <div class="coupon" data-id="fa-solid fa-hands">
             <div class="coupon-icon"><i class="fa-solid fa-utensils"></i></div>
             <div class="flex-1 text-left">
               <p class="coupon-title font-bold text-gray-800 text-sm">Vale Cócegas</p>
@@ -782,8 +782,8 @@
             <button type="button" class="redeem-btn" onclick="redeemCoupon(this)">Resgatar</button>
           </div>
 
-          <div class="coupon" data-id="massagem">
-            <div class="coupon-icon"><i class="fa-solid fa-hands"></i></div>
+          <div class="coupon" data-id="carinho">
+            <div class="coupon-icon"><i class="fa-solid fa-heart"></i></div>
             <div class="flex-1 text-left">
               <p class="coupon-title font-bold text-gray-800 text-sm">Vale Carinho</p>
               <p class="coupon-sub text-xs text-gray-500">Sem hora para acabar</p>
@@ -791,8 +791,8 @@
             <button type="button" class="redeem-btn" onclick="redeemCoupon(this)">Resgatar</button>
           </div>
 
-          <div class="coupon" data-id="filme">
-            <div class="coupon-icon"><i class="fa-solid fa-film"></i></div>
+          <div class="coupon" data-id="pedido">
+            <div class="coupon-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
             <div class="flex-1 text-left">
               <p class="coupon-title font-bold text-gray-800 text-sm">Vale Pedido</p>
               <p class="coupon-sub text-xs text-gray-500">Direito a um pedido concedido</p>
@@ -981,7 +981,7 @@
       const btn = coupon.querySelector('.redeem-btn');
       btn.disabled = true;
       btn.innerText = 'Resgatado';
-      coupon.querySelector('.coupon-sub').innerText = 'Resgatado! Me mande um print para usar.';
+      coupon.querySelector('.coupon-sub').innerText = 'Resgatado!para usar.';
     }
 
     function redeemCoupon(btn) {
