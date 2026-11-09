@@ -4,45 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Feliz Aniversário, meu amor!</title>
-  
-  <!-- Tailwind CSS para estilização moderna e responsiva -->
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome para ícones -->
+  <!-- FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Fontes Google -->
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+
   <style>
-    /* Animação dos corações ao clicar */
-.click-heart {
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  animation: floatUp 1s ease-out forwards;
-}
-
-@keyframes floatUp {
-  0% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
-  }
-  50% {
-    transform: translate(-50%, -100px) scale(1.2) rotate(15deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -150px) scale(0.8) rotate(-15deg);
-  }
-}
-
-/* Brilho delicado ao redor do cursor */
-body {
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23eb3f84"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'), auto;
-}
-    /* ----------------------------------------------------
-       ANIMAÇÃO DO CORAÇÃO DE FUNDO 
-       ---------------------------------------------------- */
     :root {
       --valentines: #eb3f84;
     }
@@ -64,6 +34,37 @@ body {
       animation: html-bg 5s ease infinite;
     }
 
+    /* Cursor em formato de coração */
+    body {
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23eb3f84"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'), auto;
+    }
+
+    /* Corações ao clicar (SVG) */
+    .click-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      animation: floatUp 1s ease-out forwards;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+      }
+      50% {
+        transform: translate(-50%, -100px) scale(1.2) rotate(15deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -150px) scale(0.8) rotate(-15deg);
+      }
+    }
+
+    /* ----------------------------------------------------
+       ANIMAÇÃO DO CORAÇÃO DE FUNDO
+       ---------------------------------------------------- */
     .heart-bg-wrapper {
       position: fixed;
       top: 50%;
@@ -71,10 +72,9 @@ body {
       transform: translate(-50%, -50%);
       z-index: 0;
       pointer-events: none;
-      opacity: 0.95; /* Aumentado */
+      opacity: 0.95;
     }
 
-    /* Coração maior e visível no centro */
     .heart {
       position: relative;
       width: 280px;
@@ -139,7 +139,7 @@ body {
 
     /* ESTILOS DE VIDRO TRANSLÚCIDOS */
     .glass-card {
-      background: rgba(255, 255, 255, 0.65); /* Fundo suave translúcido */
+      background: rgba(255, 255, 255, 0.65);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1.5px solid rgba(255, 255, 255, 0.8);
@@ -154,13 +154,6 @@ body {
       font-family: 'Caveat', cursive;
     }
 
-    /* Checkbox personalizado */
-    .custom-checkbox:checked {
-      background-color: #eb3f84;
-      border-color: #eb3f84;
-    }
-
-    /* Animações suaves de fade */
     .fade-in {
       animation: fadeIn 0.5s ease-in-out forwards;
     }
@@ -169,27 +162,342 @@ body {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* ----------------------------------------------------
+       VELA DO DESEJO
+       ---------------------------------------------------- */
+    /* ---------- GALERIA: CARDS QUE VIRAM ---------- */
+    .flip-card {
+      perspective: 900px;
+      aspect-ratio: 3 / 4;
+      width: 100%;
+      background: none;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform .7s ease;
+      transform-style: preserve-3d;
+    }
+    .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+    .flip-face {
+      position: absolute;
+      inset: 0;
+      border-radius: 1rem;
+      overflow: hidden;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      box-shadow: 0 8px 20px -6px rgba(235, 63, 132, .35);
+    }
+    .flip-front {
+      background: linear-gradient(135deg, #fbcfe8, #f9a8d4);
+      border: 3px solid #fff;
+    }
+    .flip-front img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .flip-fallback {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      color: rgba(255, 255, 255, .8);
+    }
+    .flip-hint {
+      position: absolute;
+      left: 50%;
+      bottom: .5rem;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: 10px;
+      font-weight: 600;
+      color: #fff;
+      background: rgba(0, 0, 0, .35);
+      padding: .2rem .6rem;
+      border-radius: 999px;
+    }
+    .flip-back {
+      transform: rotateY(180deg);
+      background: #fff;
+      border: 3px solid #fbcfe8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    /* ---------- CUPONS ---------- */
+    .coupon {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .75rem;
+      background: rgba(255, 255, 255, .85);
+      border: 2px dashed #f9a8d4;
+      border-radius: 1rem;
+      transition: opacity .4s ease;
+    }
+    .coupon-icon {
+      flex-shrink: 0;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 999px;
+      background: #fce7f3;
+      color: #ec4899;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+    .redeem-btn {
+      flex-shrink: 0;
+      background: #ec4899;
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 700;
+      padding: .5rem .9rem;
+      border-radius: .75rem;
+      transition: background .2s ease, transform .1s ease;
+    }
+    .redeem-btn:hover { background: #db2777; }
+    .redeem-btn:active { transform: scale(.95); }
+    .coupon.used { opacity: .6; border-style: solid; border-color: #d1d5db; }
+    .coupon.used .coupon-title { text-decoration: line-through; }
+    .coupon.used .coupon-icon { background: #e5e7eb; color: #9ca3af; }
+    .coupon.used .redeem-btn { background: #9ca3af; cursor: default; transform: none; }
+
+    /* ---------- CHUVA DE CORAÇÕES ---------- */
+    .rain-heart {
+      position: fixed;
+      top: -40px;
+      z-index: 9998;
+      pointer-events: none;
+      animation: rainFall linear forwards;
+    }
+    @keyframes rainFall {
+      0%   { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+      100% { transform: translate(var(--drift, 0px), 115vh) rotate(300deg); opacity: .85; }
+    }
+
+    body.intro-lock {
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .intro {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: #1e1934;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      transition: opacity 1s ease;
+    }
+    .intro.intro-hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .intro-text { color: rgba(255,255,255,.8); }
+    .intro-mic { color: rgba(255,255,255,.6); }
+    .intro-mic:hover { color: #fff; }
+
+    .candle-scene {
+      position: relative;
+      width: 100%;
+      max-width: 20rem;
+      height: 17em;
+      font-size: 16px;
+    }
+
+    .c-glow {
+      position: absolute;
+      left: calc(50% - .1em);
+      bottom: 10.4em;
+      width: .2em;
+      height: .2em;
+      border-radius: 100%;
+      opacity: .15;
+      transition: opacity .6s ease;
+    }
+    .c-glow-on { animation: cGlow 3s ease-in-out infinite; }
+    .c-glow-off { animation: none; opacity: 0; }
+
+    .c-candle {
+      position: absolute;
+      left: calc(50% - .75em);
+      bottom: 1.5em;
+      width: 1.5em;
+      height: 10em;
+      overflow: hidden;
+      transition: opacity .3s ease;
+    }
+    .c-candle::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 8%;
+      width: 84%;
+      height: 80%;
+      background: linear-gradient(whitesmoke 0, #1e1934 125%);
+      border-radius: .25em;
+      box-sizing: border-box;
+      border: 1px solid #333;
+    }
+
+    .c-top {
+      position: absolute;
+      width: 100%;
+      height: 2em;
+    }
+    .c-knot {
+      position: absolute;
+      bottom: 0;
+      left: calc(50% - .05em);
+      height: .5em;
+      width: .1em;
+      background: #0f3146;
+    }
+
+    .smoke { position: absolute; opacity: 0; border-radius: 100%; }
+    .smoke:nth-child(1) { bottom: .1em; left: calc(50% - .5em); height: .5em; width: .5em; background: silver; }
+    .smoke:nth-child(2) { bottom: .6em; left: 50%; height: .6em; width: .6em; background: lightgray; animation-delay: .2s; }
+    .smoke:nth-child(3) { bottom: 1.1em; left: 20%; height: .3em; width: .3em; background: whitesmoke; animation-delay: .3s; }
+
+    .c-flame {
+      position: absolute;
+      bottom: .15em;
+      left: 0;
+      width: 1.5em;
+      height: 1.6em;
+      padding: 0;
+      border: 0;
+      background: #ffee86;
+      border-radius: 100%;
+      box-shadow: inset 0 0 0 .1em #ffee86;
+      transform: rotateY(30deg);
+      cursor: pointer;
+    }
+    .c-flame::after {
+      content: '';
+      position: absolute;
+      width: .7em;
+      height: .9em;
+      bottom: 10%;
+      left: calc(50% - .35em);
+      background: #ff3200;
+      border-radius: 100%;
+      animation: cBurnInner 1.5s ease-in-out infinite;
+    }
+    .c-flame:hover { background: yellow; transition: all .1s ease-in-out; }
+    .c-flame:hover::after { background: red; }
+
+    .stripe {
+      position: absolute;
+      left: -.25em;
+      width: 2em;
+      height: .25em;
+      background: #ff4b6f;
+      transform: rotate(25deg);
+      border-radius: 100%;
+      box-shadow: 1px 1px 0 1px rgba(0,0,0,.25);
+    }
+    .stripe:nth-child(1) { top: 2.7em; opacity: 1; }
+    .stripe:nth-child(2) { top: 4.2em; opacity: .9; }
+    .stripe:nth-child(3) { top: 5.7em; opacity: .73; }
+    .stripe:nth-child(4) { top: 7.2em; opacity: .65; }
+    .stripe:nth-child(5) { top: 8.7em; opacity: .6; }
+
+    .burn { animation: cBurn 1.5s ease-in-out infinite; }
+    .puff { animation: cPuff .3s ease-in-out forwards; }
+    .puff-bubble { animation: cPuffBubble .75s ease-in-out forwards; }
+
+    @keyframes cGlow {
+      0%, 100% { box-shadow: 0 0 1.5em 2.2em rgba(255,246,162,.75); }
+      50%      { box-shadow: 0 0 1.5em 2em rgba(255,246,162,.6); }
+    }
+    @keyframes cBurn {
+      0%, 100% { height: 1.7em; transform: rotateY(30deg); }
+      50%      { height: 1.3em; transform: rotateY(0deg); opacity: .9; }
+    }
+    @keyframes cBurnInner {
+      0%, 100% { height: .9em; transform: rotateX(0deg); }
+      50%      { height: .8em; transform: rotateX(30deg); }
+    }
+    @keyframes cPuff {
+      100% { transform: rotateY(-30deg); opacity: 0; }
+    }
+    @keyframes cPuffBubble {
+      0%   { opacity: 0; transform: scale(1); }
+      50%  { opacity: 1; transform: scale(1.2); }
+      100% { opacity: 0; transform: scale(.8); }
+    }
   </style>
 </head>
-<body class="relative min-h-screen flex flex-col items-center justify-start p-3 sm:p-8">
+<body class="intro-lock relative min-h-screen flex flex-col items-center justify-start p-3 sm:p-8">
+
+  <!-- TELA INICIAL: VELA DO DESEJO -->
+  <div id="intro" class="intro">
+    <div class="text-center px-6">
+      <h2 class="font-handwriting text-4xl sm:text-5xl text-white font-bold">Faça um pedido</h2>
+      <p id="wishText" class="intro-text text-sm sm:text-base mt-2">
+        Feche os olhos, pense num desejo... e apague a vela
+      </p>
+    </div>
+
+    <div class="candle-scene">
+      <div class="c-glow c-glow-on"></div>
+      <div class="c-candle">
+        <div class="stripe"></div>
+        <div class="stripe"></div>
+        <div class="stripe"></div>
+        <div class="stripe"></div>
+        <div class="stripe"></div>
+        <div class="c-top">
+          <div class="smoke"></div>
+          <div class="smoke"></div>
+          <div class="smoke"></div>
+          <div class="c-knot"></div>
+          <button type="button" class="c-flame burn" aria-label="Apagar a vela"></button>
+        </div>
+      </div>
+    </div>
+
+    <button id="micBtn" type="button" class="intro-mic text-xs font-semibold underline">
+      Prefere assoprar de verdade? Use o microfone
+    </button>
+  </div>
 
   <!-- Animação do Coração no Fundo -->
   <div class="heart-bg-wrapper">
     <div class="heart"></div>
   </div>
 
-  <!-- Player de Música Flutuante no Canto Inferior Direito -->
+  <!-- Player de Música Flutuante -->
   <div class="fixed bottom-4 right-4 z-50">
     <button id="musicToggleBtn" onclick="toggleAudio()" class="flex items-center gap-2 bg-pink-600 hover:bg-pink-700 text-white text-xs sm:text-sm font-medium px-4 py-3 rounded-full shadow-xl transition transform hover:scale-105 active:scale-95">
-      <i id="musicIcon" class="fa-solid fa-music animate-spin"></i>
-      <span id="musicText">Pausar Música</span>
+      <i id="musicIcon" class="fa-solid fa-music"></i>
+      <span id="musicText">Tocar Música</span>
     </button>
   </div>
 
   <!-- ÁUDIO DE FUNDO -->
-  <!-- EDITAR AQUI: MÚSICA DE FUNDO (Substitua a URL do arquivo mp3 caso queira sua própria música) -->
-  <audio id="bgAudio" loop autoplay>
-    <source src="Preciso Dizer Que Te Amo_!.mp3" type="audio/mpeg">
+  <!-- EDITAR AQUI: renomeie seu arquivo para musica.mp3 (sem espaços nem "!") e coloque na mesma pasta deste index.html -->
+  <audio id="bgAudio" loop>
+    <source src="musica.mp3" type="audio/mpeg">
     Seu navegador não suporta áudio HTML5.
   </audio>
 
@@ -199,27 +507,24 @@ body {
     <!-- CARTÃO PRINCIPAL -->
     <div class="glass-card rounded-3xl p-6 sm:p-12 text-slate-800 space-y-10">
 
-      <!-- 1. SEÇÃO DE ANIVERSÁRIO (CABEÇALHO) -->
+      <!-- 1. CABEÇALHO -->
       <section class="text-center space-y-3 border-b border-pink-100 pb-8">
-        
-        <!-- EDITAR AQUI: DATA DELICADA NO TOPO -->
+
         <span class="inline-block font-delicate text-2xl sm:text-3xl text-pink-600 tracking-wide font-bold">
           20 de Novembro
         </span>
 
-        <!-- EDITAR AQUI: TÍTULO PRINCIPAL -->
         <h1 class="text-4xl sm:text-6xl font-bold text-gray-900 font-handwriting leading-tight">
-          Feliz vida, amor! 
+          Feliz vida, amor!
         </h1>
 
-        <!-- EDITAR AQUI: MENSAGEM DE BOAS-VINDAS / HOMENAGEM -->
         <p class="text-base sm:text-lg text-gray-600 max-w-lg mx-auto leading-relaxed pt-2">
           Hoje queria te devolver um pouquinho da felicidade que você traz nos meus dias
         </p>
       </section>
 
-      <!-- 2. CONTADOR DE EXISTÊNCIA (Nasceu em 20/11/2006 às 21:11) -->
-      <section class="bg-white/50 rounded-3xl p-6 border border-pink-100/60 text-center shadow-xs space-y-4 backdrop-blur-xs">
+      <!-- 2. CONTADOR (nasceu em 20/11/2006 às 21:11) -->
+      <section class="bg-white/50 rounded-3xl p-6 border border-pink-100/60 text-center shadow-sm space-y-4 backdrop-blur-sm">
         <div>
           <h2 class="text-sm uppercase font-bold text-pink-600 tracking-wider">Desde os primeiros capítulos da sua história,</h2>
           <p class="text-xs text-gray-600 mt-0.5">tudo começou há...</p>
@@ -249,7 +554,7 @@ body {
         </div>
       </section>
 
-      <!-- 3. SEÇÃO DA CARTA DE AMOR INTERATIVA -->
+      <!-- 3. CARTA DE AMOR -->
       <section class="space-y-4">
         <div class="text-center">
           <h2 class="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
@@ -258,18 +563,15 @@ body {
           <p class="text-xs text-gray-500">Clique para descobrir</p>
         </div>
 
-        <!-- Botão de Abertura -->
-        <button onclick="askToOpenLetter()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-semibold flex items-center justify-center gap-3 shadow-lg shadow-pink-500/25 transition transform active:scale-98">
+        <button onclick="askToOpenLetter()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-semibold flex items-center justify-center gap-3 shadow-lg shadow-pink-500/25 transition transform active:scale-95">
           <i class="fa-solid fa-heart"></i>
           <span>Abrir</span>
         </button>
 
-        <!-- Carta (Após o alerta de confirmação) -->
         <div id="secretLetter" class="hidden bg-white/90 p-6 sm:p-8 rounded-3xl border border-pink-200 shadow-lg space-y-4 fade-in">
-          <!-- EDITAR AQUI -->
+          <!-- EDITAR AQUI: escreva sua carta -->
           <p class="font-handwriting text-3xl text-pink-600 font-bold">Meu amor,</p>
-          
-          <!-- Cada parágrafo da carta fica dentro de um <p> -->
+
           <p class="font-delicate text-2xl text-gray-800 leading-relaxed">
             ...
           </p>
@@ -277,7 +579,7 @@ body {
           <p class="font-delicate text-2xl text-gray-800 leading-relaxed">
             ...
           </p>
-          
+
           <p class="font-delicate text-2xl text-gray-800 leading-relaxed">
             ...
           </p>
@@ -288,8 +590,8 @@ body {
         </div>
       </section>
 
-      <!-- 4. CHECKLIST + BARRA DE PROGRESSO -->
-      <section class="space-y-5 bg-white/50 p-6 rounded-3xl border border-pink-100/60 shadow-xs backdrop-blur-xs">
+      <!-- 4. CHECKLIST + PROGRESSO -->
+      <section class="space-y-5 bg-white/50 p-6 rounded-3xl border border-pink-100/60 shadow-sm backdrop-blur-sm">
         <div>
           <h2 class="text-lg sm:text-xl font-bold text-gray-800 flex items-center gap-2">
             <i class="fa-solid fa-list-check text-pink-500"></i> Conquistas
@@ -299,7 +601,6 @@ body {
           </p>
         </div>
 
-        <!-- Barra de Progresso -->
         <div class="space-y-1">
           <div class="flex justify-between text-xs font-semibold text-pink-600">
             <span>Progresso da nossa história</span>
@@ -310,7 +611,6 @@ body {
           </div>
         </div>
 
-        <!-- EDITAR AQUI: ITENS DA LISTA (Adicione ou altere os textos abaixo) -->
         <div class="space-y-3 pt-2 text-sm text-gray-700" id="checklist">
           <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
             <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
@@ -352,13 +652,13 @@ body {
             <span>Abrir investimentos para ficar milionário em 2045</span>
           </label>
 
-           <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
+          <label class="flex items-center gap-3 p-3 bg-white/80 rounded-xl cursor-pointer hover:bg-pink-50/50 transition">
             <input type="checkbox" onchange="updateProgress()" class="w-5 h-5 accent-pink-500 rounded cursor-pointer">
             <span>Batalhar com códigos para impressionar seu amor</span>
           </label>
         </div>
 
-        <!-- EDITAR AQUI: POEMA DESBLOQUEÁVEL (Aparece automaticamente quando marcar 100%) -->
+        <!-- Poema desbloqueável (aparece em 100%) -->
         <div id="unlockedPoem" class="hidden bg-pink-50 p-6 rounded-2xl border border-pink-200 text-center space-y-3 fade-in mt-4">
           <span class="inline-block px-3 py-1 bg-pink-200 text-pink-700 rounded-full text-xs font-bold uppercase">
             🔓 História Desbloqueada!
@@ -371,7 +671,147 @@ body {
         </div>
       </section>
 
-      <!-- 5. SEÇÃO DE MÚSICAS / PLAYLIST SPOTIFY -->
+      <!-- 4.1 GALERIA DE FOTOS (cards que viram) -->
+      <!-- EDITAR AQUI: coloque suas fotos numa pasta "fotos" (foto1.jpg ... foto6.jpg) e troque as legendas -->
+      <section class="space-y-4 border-t border-pink-100 pt-8">
+        <div class="text-center">
+          <h2 class="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-camera-retro text-pink-500"></i> Nossos momentos
+          </h2>
+          <p class="text-xs text-gray-500 mt-1">Toque nas fotos</p>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <button type="button" class="flip-card" onclick="this.classList.toggle('flipped')" aria-label="Virar foto 1">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">
+                <i class="fa-solid fa-image flip-fallback"></i>
+                <img src="fotos/foto1.jpg" alt="" onerror="this.style.display='none'">
+                <span class="flip-hint"><i class="fa-solid fa-rotate"></i> Toque para virar</span>
+              </div>
+              <div class="flip-face flip-back">
+                <p class="font-delicate text-xl sm:text-2xl text-pink-600 leading-snug">Legenda da foto 1</p>
+              </div>
+            </div>
+          </button>
+
+          <button type="button" class="flip-card" onclick="this.classList.toggle('flipped')" aria-label="Virar foto 2">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">
+                <i class="fa-solid fa-image flip-fallback"></i>
+                <img src="fotos/foto2.jpg" alt="" onerror="this.style.display='none'">
+                <span class="flip-hint"><i class="fa-solid fa-rotate"></i> Toque para virar</span>
+              </div>
+              <div class="flip-face flip-back">
+                <p class="font-delicate text-xl sm:text-2xl text-pink-600 leading-snug">Legenda da foto 2</p>
+              </div>
+            </div>
+          </button>
+
+          <button type="button" class="flip-card" onclick="this.classList.toggle('flipped')" aria-label="Virar foto 3">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">
+                <i class="fa-solid fa-image flip-fallback"></i>
+                <img src="fotos/foto3.jpg" alt="" onerror="this.style.display='none'">
+                <span class="flip-hint"><i class="fa-solid fa-rotate"></i> Toque para virar</span>
+              </div>
+              <div class="flip-face flip-back">
+                <p class="font-delicate text-xl sm:text-2xl text-pink-600 leading-snug">Legenda da foto 3</p>
+              </div>
+            </div>
+          </button>
+
+          <button type="button" class="flip-card" onclick="this.classList.toggle('flipped')" aria-label="Virar foto 4">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">
+                <i class="fa-solid fa-image flip-fallback"></i>
+                <img src="fotos/foto4.jpg" alt="" onerror="this.style.display='none'">
+                <span class="flip-hint"><i class="fa-solid fa-rotate"></i> Toque para virar</span>
+              </div>
+              <div class="flip-face flip-back">
+                <p class="font-delicate text-xl sm:text-2xl text-pink-600 leading-snug">Legenda da foto 4</p>
+              </div>
+            </div>
+          </button>
+
+          <button type="button" class="flip-card" onclick="this.classList.toggle('flipped')" aria-label="Virar foto 5">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">
+                <i class="fa-solid fa-image flip-fallback"></i>
+                <img src="fotos/foto5.jpg" alt="" onerror="this.style.display='none'">
+                <span class="flip-hint"><i class="fa-solid fa-rotate"></i> Toque para virar</span>
+              </div>
+              <div class="flip-face flip-back">
+                <p class="font-delicate text-xl sm:text-2xl text-pink-600 leading-snug">Legenda da foto 5</p>
+              </div>
+            </div>
+          </button>
+
+          <button type="button" class="flip-card" onclick="this.classList.toggle('flipped')" aria-label="Virar foto 6">
+            <div class="flip-inner">
+              <div class="flip-face flip-front">
+                <i class="fa-solid fa-image flip-fallback"></i>
+                <img src="fotos/foto6.jpg" alt="" onerror="this.style.display='none'">
+                <span class="flip-hint"><i class="fa-solid fa-rotate"></i> Toque para virar</span>
+              </div>
+              <div class="flip-face flip-back">
+                <p class="font-delicate text-xl sm:text-2xl text-pink-600 leading-snug">Legenda da foto 6</p>
+              </div>
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <!-- 4.2 CUPONS DE PRESENTE -->
+      <!-- EDITAR AQUI: troque os textos. O data-id de cada cupom precisa ser único. -->
+      <section class="space-y-4 border-t border-pink-100 pt-8">
+        <div class="text-center">
+          <h2 class="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-ticket text-pink-500"></i> Vales
+          </h2>
+          <p class="text-xs text-gray-500 mt-1">Toque em Resgatar para usar o seu vale</p>
+        </div>
+
+        <div class="space-y-3" id="coupons">
+          <div class="coupon" data-id="jantar">
+            <div class="coupon-icon"><i class="fa-solid fa-utensils"></i></div>
+            <div class="flex-1 text-left">
+              <p class="coupon-title font-bold text-gray-800 text-sm">Vale Cócegas</p>
+              <p class="coupon-sub text-xs text-gray-500">A tortura é permitida por 2min</p>
+            </div>
+            <button type="button" class="redeem-btn" onclick="redeemCoupon(this)">Resgatar</button>
+          </div>
+
+          <div class="coupon" data-id="massagem">
+            <div class="coupon-icon"><i class="fa-solid fa-hands"></i></div>
+            <div class="flex-1 text-left">
+              <p class="coupon-title font-bold text-gray-800 text-sm">Vale Carinho</p>
+              <p class="coupon-sub text-xs text-gray-500">Sem hora para acabar</p>
+            </div>
+            <button type="button" class="redeem-btn" onclick="redeemCoupon(this)">Resgatar</button>
+          </div>
+
+          <div class="coupon" data-id="filme">
+            <div class="coupon-icon"><i class="fa-solid fa-film"></i></div>
+            <div class="flex-1 text-left">
+              <p class="coupon-title font-bold text-gray-800 text-sm">Vale Pedido</p>
+              <p class="coupon-sub text-xs text-gray-500">Direito a um pedido concedido</p>
+            </div>
+            <button type="button" class="redeem-btn" onclick="redeemCoupon(this)">Resgatar</button>
+          </div>
+
+          <div class="coupon" data-id="cochilo">
+            <div class="coupon-icon"><i class="fa-solid fa-bed"></i></div>
+            <div class="flex-1 text-left">
+              <p class="coupon-title font-bold text-gray-800 text-sm">Vale Cochilo</p>
+              <p class="coupon-sub text-xs text-gray-500">Com direito a carinho e sem interrupções</p>
+            </div>
+            <button type="button" class="redeem-btn" onclick="redeemCoupon(this)">Resgatar</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. SPOTIFY -->
       <section class="space-y-4 border-t border-pink-100 pt-8">
         <div class="text-center">
           <h2 class="text-xl font-bold text-gray-800 flex items-center justify-center gap-2">
@@ -380,15 +820,12 @@ body {
           <p class="text-xs text-gray-500 mt-1">e as melodias que seus acordes carregam</p>
         </div>
 
-        <!-- EDITAR AQUI: LINK DA PLAYLIST OU EMBED DO SPOTIFY -->
-        <!-- Você pode substituir o iframe abaixo pelo código de "Incorporar" da sua playlist do Spotify -->
         <div class="rounded-2xl overflow-hidden shadow-md">
-          <iframe style="border-radius:12px" src="..." width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6MazgS07NwmREMLEcPOb4l?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
 
-        <!-- Link Direto como alternativa -->
         <div class="text-center pt-2">
-          <a href="..." target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold text-pink-600 hover:text-pink-700 underline">
+          <a href="https://open.spotify.com/playlist/6MazgS07NwmREMLEcPOb4l" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-xs font-semibold text-pink-600 hover:text-pink-700 underline">
             <span>Abrir nossa playlist no Spotify</span>
             <i class="fa-solid fa-arrow-up-right-from-square"></i>
           </a>
@@ -404,7 +841,7 @@ body {
   </main>
 
   <!-- MODAL DE CONFIRMAÇÃO DA CARTA -->
-  <div id="warningModal" class="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden">
+  <div id="warningModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
     <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center space-y-5 shadow-2xl border border-pink-100 fade-in">
       <div class="w-16 h-16 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center mx-auto text-2xl">
         <i class="fa-solid fa-triangle-exclamation"></i>
@@ -416,7 +853,6 @@ body {
         </p>
       </div>
 
-      <!-- Duas opções de SIM conforme solicitado -->
       <div class="space-y-2 pt-2">
         <button onclick="confirmOpenLetter()" class="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white text-sm font-bold rounded-xl shadow-md transition">
           Sim!
@@ -429,38 +865,35 @@ body {
   </div>
 
   <script>
-    
     /* ----------------------------------------------------
-       CONTADOR DE TEMPO DE EXISTÊNCIA (20/11/2006 às 21:11)
+       CONTADOR DE EXISTÊNCIA (20/11/2006 às 21:11)
        ---------------------------------------------------- */
-    // Mês é 0-indexed no JS: 0=Jan, 10=Novembro
+    // Mês é 0-indexed no JS: 10 = Novembro
     const birthDate = new Date(2006, 10, 20, 21, 11, 0);
 
     function updateExistenceCounter() {
       const now = new Date();
-      let diff = now - birthDate;
-
-      // Cálculo aproximado de Anos e Dias
-      const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
-      const remainingDaysMs = diff % (1000 * 60 * 60 * 24 * 365.25);
-      
-      const days = Math.floor(remainingDaysMs / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      document.getElementById('years').innerText = String(years).padStart(2, '0');
-      document.getElementById('days').innerText = String(days).padStart(2, '0');
-      document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-      document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-      document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+      let years = now.getFullYear() - birthDate.getFullYear();
+      let last = new Date(birthDate);
+      last.setFullYear(birthDate.getFullYear() + years);
+      if (last > now) {
+        years--;
+        last.setFullYear(birthDate.getFullYear() + years);
+      }
+      const rest = now - last;
+      const set = (id, v) => document.getElementById(id).innerText = String(v).padStart(2, '0');
+      set('years', years);
+      set('days', Math.floor(rest / 864e5));
+      set('hours', Math.floor(rest / 36e5) % 24);
+      set('minutes', Math.floor(rest / 6e4) % 60);
+      set('seconds', Math.floor(rest / 1e3) % 60);
     }
 
     setInterval(updateExistenceCounter, 1000);
     updateExistenceCounter();
 
     /* ----------------------------------------------------
-       CONTROLE DO MODAL DA CARTA
+       MODAL DA CARTA
        ---------------------------------------------------- */
     function askToOpenLetter() {
       document.getElementById('warningModal').classList.remove('hidden');
@@ -479,22 +912,15 @@ body {
     function updateProgress() {
       const checkboxes = document.querySelectorAll('#checklist input[type="checkbox"]');
       const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
-      const total = checkboxes.length;
-      const percentage = Math.round((checkedCount / total) * 100);
+      const percentage = Math.round((checkedCount / checkboxes.length) * 100);
 
-      const progressBar = document.getElementById('progressBar');
-      const progressText = document.getElementById('progressText');
-      
-      progressBar.style.width = percentage + '%';
-      progressText.innerText = percentage + '%';
+      document.getElementById('progressBar').style.width = percentage + '%';
+      document.getElementById('progressText').innerText = percentage + '%';
 
-      // Desbloqueia o poema se atingir 100%
-      const unlockedPoem = document.getElementById('unlockedPoem');
-      if (percentage === 100) {
-        unlockedPoem.classList.remove('hidden');
-      } else {
-        unlockedPoem.classList.add('hidden');
-      }
+      const poem = document.getElementById('unlockedPoem');
+      const wasHidden = poem.classList.contains('hidden');
+      poem.classList.toggle('hidden', percentage !== 100);
+      if (percentage === 100 && wasHidden) heartRain(45);
     }
 
     /* ----------------------------------------------------
@@ -504,38 +930,151 @@ body {
     const musicIcon = document.getElementById('musicIcon');
     const musicText = document.getElementById('musicText');
 
-    // Tenta dar play automático assim que a página carregar
+    // O botão sempre reflete o estado real do áudio
+    audio.addEventListener('play', () => {
+      musicIcon.classList.add('animate-spin');
+      musicText.innerText = 'Pausar Música';
+    });
+    audio.addEventListener('pause', () => {
+      musicIcon.classList.remove('animate-spin');
+      musicText.innerText = 'Tocar Música';
+    });
+
+    // Navegadores bloqueiam autoplay: toca no primeiro clique
     window.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play().catch(() => {});
-      }
+      if (audio.paused) audio.play().catch(() => {});
     }, { once: true });
 
     function toggleAudio() {
       if (audio.paused) {
-        audio.play();
-        musicIcon.classList.add('animate-spin');
-        musicText.innerText = 'Pausar Música';
+        audio.play().catch(() => {});
       } else {
         audio.pause();
-        musicIcon.classList.remove('animate-spin');
-        musicText.innerText = 'Tocar Música';
       }
     }
-    // Efeito de corações ao clicar em qualquer lugar da tela
-document.addEventListener('click', function(e) {
-  const heart = document.createElement('div');
-  heart.className = 'click-heart';
-  heart.innerHTML = '💗';
-  heart.style.left = e.clientX + 'px';
-  heart.style.top = e.clientY + 'px';
-  heart.style.fontSize = (Math.random() * 12 + 16) + 'px'; // Tamanhos variados
-  document.body.appendChild(heart);
 
-  setTimeout(() => {
-    heart.remove();
-  }, 1000);
-});
+    /* ----------------------------------------------------
+       CHUVA DE CORAÇÕES (SVG) E CUPONS
+       ---------------------------------------------------- */
+    const HEART_PATH = 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z';
+    const HEART_COLORS = ['#eb3f84', '#ff6fa5', '#f43f5e', '#fb7185', '#ec4899'];
+
+    function heartRain(count) {
+      for (let i = 0; i < count; i++) {
+        const size = Math.round(Math.random() * 18 + 14);
+        const color = HEART_COLORS[Math.floor(Math.random() * HEART_COLORS.length)];
+        const h = document.createElement('div');
+        h.className = 'rain-heart';
+        h.style.left = (Math.random() * 100) + 'vw';
+        h.style.setProperty('--drift', (Math.random() * 120 - 60) + 'px');
+        h.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        h.style.animationDelay = (Math.random() * 1.5) + 's';
+        h.innerHTML = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="' + color + '"><path d="' + HEART_PATH + '"/></svg>';
+        document.body.appendChild(h);
+        h.addEventListener('animationend', () => h.remove());
+      }
+    }
+
+    // Cupons: o resgate vale só até atualizar a página
+    function markCouponUsed(coupon) {
+      coupon.classList.add('used');
+      const btn = coupon.querySelector('.redeem-btn');
+      btn.disabled = true;
+      btn.innerText = 'Resgatado';
+      coupon.querySelector('.coupon-sub').innerText = 'Resgatado! Me mande um print para usar.';
+    }
+
+    function redeemCoupon(btn) {
+      const coupon = btn.closest('.coupon');
+      if (coupon.classList.contains('used')) return;
+      markCouponUsed(coupon);
+      heartRain(14);
+    }
+
+    /* ----------------------------------------------------
+       CORAÇÕES (SVG) AO CLICAR
+       ---------------------------------------------------- */
+    document.addEventListener('click', function (e) {
+      const heart = document.createElement('div');
+      heart.className = 'click-heart';
+      heart.innerHTML = '💗';
+      heart.style.fontSize = (Math.random() * 12 + 16) + 'px';
+      heart.style.left = e.clientX + 'px';
+      heart.style.top = e.clientY + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1000);
+    });
+
+    /* ----------------------------------------------------
+       VELA DO DESEJO
+       ---------------------------------------------------- */
+    (function () {
+      const flame = document.querySelector('.c-flame');
+      const glow = document.querySelector('.c-glow');
+      const candle = document.querySelector('.c-candle');
+      const smokes = document.querySelectorAll('.smoke');
+      const wishText = document.getElementById('wishText');
+      const micBtn = document.getElementById('micBtn');
+      let out = false, stream = null, ctx = null;
+
+      function blowOut() {
+        if (out) return;
+        out = true;
+        flame.classList.remove('burn');
+        flame.classList.add('puff');
+        smokes.forEach(s => s.classList.add('puff-bubble'));
+        glow.classList.remove('c-glow-on');
+        glow.classList.add('c-glow-off');
+        candle.style.opacity = '.5';
+        wishText.innerHTML = 'Seu desejo <b>vai</b> se realizar...';
+        micBtn.classList.add('hidden');
+
+        // Começa a música (o clique/gesto do usuário libera o áudio)
+        audio.play().catch(() => {});
+
+        // Mostra a mensagem do desejo por alguns segundos e revela o site
+        const intro = document.getElementById('intro');
+        setTimeout(() => {
+          intro.classList.add('intro-hide');
+          setTimeout(() => {
+            intro.remove();
+            document.body.classList.remove('intro-lock');
+            window.scrollTo(0, 0);
+          }, 1000);
+        }, 3200);
+        if (stream) stream.getTracks().forEach(t => t.stop());
+        if (ctx) ctx.close();
+      }
+
+      flame.addEventListener('click', blowOut);
+
+      // Opcional: apagar assoprando no microfone (precisa de HTTPS, o GitHub Pages já tem)
+      micBtn.addEventListener('click', async () => {
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const analyser = ctx.createAnalyser();
+          analyser.fftSize = 512;
+          ctx.createMediaStreamSource(stream).connect(analyser);
+          const data = new Uint8Array(analyser.fftSize);
+          micBtn.innerText = 'Pode assoprar...';
+          let loud = 0;
+
+          (function listen() {
+            if (out) return;
+            analyser.getByteTimeDomainData(data);
+            let sum = 0;
+            for (const v of data) { const n = (v - 128) / 128; sum += n * n; }
+            const rms = Math.sqrt(sum / data.length);
+            loud = rms > 0.2 ? loud + 1 : 0;
+            if (loud > 4) return blowOut();
+            requestAnimationFrame(listen);
+          })();
+        } catch (e) {
+          micBtn.innerText = 'Microfone indisponível, clique na chama!';
+        }
+      });
+    })();
   </script>
 </body>
 </html>
